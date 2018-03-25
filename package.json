@@ -50,7 +50,10 @@
   "eslintConfig": {
     "extends": [
       "stylelint"
-    ]
+    ],
+    "rules": {
+      "node/no-unpublished-require": "off"
+    }
   },
   "jest": {
     "preset": "./jest-preset.json"
