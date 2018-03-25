@@ -5,7 +5,8 @@
   "keywords": [
     "stylelint",
     "jest",
-    "jest-preset"
+    "jest-preset",
+    "preset"
   ],
   "author": "stylelint",
   "license": "MIT",
@@ -13,9 +14,8 @@
     "type": "git",
     "url": "https://github.com/stylelint/jest-preset-stylelint.git"
   },
-  "main": "index.js",
   "files": [
-    "index.js"
+    "jest-preset.json"
   ],
   "dependencies": {
     "lodash": "^4.17.5",
