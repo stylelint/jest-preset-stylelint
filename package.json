@@ -34,7 +34,7 @@
     "stylelint": "^9.1.3"
   },
   "peerDependencies": {
-    "jest": ">=21",
+    "jest": ">=22",
     "stylelint": "^9.1.3"
   },
   "scripts": {
