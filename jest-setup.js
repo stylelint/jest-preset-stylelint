@@ -1,11 +1,11 @@
 "use strict";
 
 const _ = require("lodash");
-const basicChecks = require("./lib/testUtils/basicChecks");
+const basicChecks = require("./node_modules/stylelint/lib/testUtils/basicChecks");
 const less = require("postcss-less");
-const stylelint = require("./lib/standalone");
+const stylelint = require("./node_modules/stylelint/lib/standalone.js");
 
-jest.mock("./lib/utils/getOsEol", () => () => "\n");
+jest.mock("./node_modules/stylelint/lib/utils/getOsEol", () => () => "\n");
 
 global.testRule = (rule, schema) => {
   expect.extend({

@@ -1,4 +1,4 @@
 # 1.0.0
 
--   Initial release
--   `jest-setup.js` copied from https://github.com/stylelint/stylelint/blob/4c90af5863acf3026d8424b49a78189106f052dc/jest-setup.js
+-   Initial release.
+-   `jest-setup.js` copied from stylelint upstream [commit](https://github.com/stylelint/stylelint/blob/4c90af5863acf3026d8424b49a78189106f052dc/jest-setup.js).
