@@ -1,3 +1,7 @@
+# 1.1.0
+
+-   Include `jest-setup.js` in a .package.json` distribution `files`.
+
 # 1.0.0
 
 -   Initial release.
