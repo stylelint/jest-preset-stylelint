@@ -18,7 +18,7 @@
     "js"
   ],
   "setupFiles": [
-    "./jest-setup.js"
+    "<rootDir>/node_modules/jest-preset-stylelint/jest-setup.js"
   ],
   "testEnvironment": "node",
 	"testMatch": [
