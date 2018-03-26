@@ -1,6 +1,7 @@
-# 1.1.0
+# 1.2.0
 
 -   Use absolute path to `jest-setup.js` in `jest-preset.json`.
+-   Avoid Jest preset conflicts by not using the Jest preset for this repo.
 
 # 1.1.0
 

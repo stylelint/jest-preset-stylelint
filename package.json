@@ -56,7 +56,11 @@
     }
   },
   "jest": {
-    "preset": "./jest-preset.json"
+		"testEnvironment": "node",
+		"testMatch": [
+			"**/?(*.)(spec|test).js"
+		],
+		"verbose": true
   },
   "remarkConfig": {
     "plugins": [
