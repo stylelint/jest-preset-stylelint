@@ -56,11 +56,11 @@
     }
   },
   "jest": {
-		"testEnvironment": "node",
-		"testMatch": [
-			"**/?(*.)(spec|test).js"
-		],
-		"verbose": true
+    "testEnvironment": "node",
+    "testMatch": [
+      "**/?(*.)(spec|test).js"
+    ],
+    "verbose": true
   },
   "remarkConfig": {
     "plugins": [
