@@ -1,9 +1,9 @@
 "use strict";
 
 const _ = require("lodash");
-const basicChecks = require("./node_modules/stylelint/lib/testUtils/basicChecks.js");
+const basicChecks = require("stylelint").basicChecks;
 const less = require("postcss-less");
-const stylelint = require("./node_modules/stylelint/lib/standalone.js");
+const stylelint = require("stylelint").standalone;
 
 
 jest.mock("./getOsEol.js", () => () => "\n");
