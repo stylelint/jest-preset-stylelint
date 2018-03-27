@@ -5,7 +5,8 @@ const basicChecks = require("./node_modules/stylelint/lib/testUtils/basicChecks.
 const less = require("postcss-less");
 const stylelint = require("./node_modules/stylelint/lib/standalone.js");
 
-jest.mock("./node_modules/stylelint/lib/utils/getOsEol.js", () => () => "\n");
+
+jest.mock("./getOsEol.js", () => () => "\n");
 
 global.testRule = (rule, schema) => {
   expect.extend({
