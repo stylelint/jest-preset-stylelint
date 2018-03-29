@@ -1,3 +1,8 @@
+# 1.3.0
+
+-   Use stylelint exported modules.
+-   Include `getOsEol.js` in a .package.json` distribution `files`.
+
 # 1.2.0
 
 -   Use absolute path to `jest-setup.js` in `jest-preset.json`.
