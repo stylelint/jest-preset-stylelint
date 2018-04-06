@@ -15,6 +15,7 @@
     "url": "https://github.com/stylelint/jest-preset-stylelint.git"
   },
   "files": [
+    "create-jest-preset.js",
     "getOsEol.js",
     "jest-setup.js",
     "jest-preset.json"
