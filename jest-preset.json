@@ -15,7 +15,10 @@
     }
   },
   "moduleFileExtensions": [
-    "js"
+    "js",
+    "json",
+    "jsx",
+    "node"
   ],
   "testEnvironment": "node",
   "testMatch": [

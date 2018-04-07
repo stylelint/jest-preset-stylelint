@@ -7,6 +7,9 @@ it('should contain expected keys', () => {
 
 it("should match .js extension files", () => {
   expect(preset.moduleFileExtensions).toEqual([
-    "js"
+    "js",
+    "json",
+    "jsx",
+    "node"
   ]);
 });
