@@ -20,6 +20,9 @@
     "jest-setup.js",
     "jest-preset.json"
   ],
+  "engines": {
+    "node": ">=6"
+  },
   "dependencies": {
     "lodash": "^4.17.5",
     "postcss-less": "^1.1.5"
