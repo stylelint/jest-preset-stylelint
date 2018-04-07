@@ -8,7 +8,6 @@ Array [
   "coverageReporters",
   "coverageThreshold",
   "moduleFileExtensions",
-  "setupFiles",
   "testEnvironment",
   "testMatch",
   "verbose",
