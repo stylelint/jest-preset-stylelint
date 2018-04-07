@@ -20,6 +20,9 @@ const jestBasePreset = {
   },
   moduleFileExtensions: [
     'js',
+    'json',
+    'jsx',
+    'node',
   ],
   testEnvironment: 'node',
     testMatch: [
