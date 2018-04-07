@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 
 const fs = require('fs');
 
@@ -19,12 +19,12 @@ const jestBasePreset = {
     },
   },
   moduleFileExtensions: [
-    "js",
+    'js',
   ],
   setupFiles: [
     '<rootDir>/node_modules/jest-preset-stylelint/jest-setup.js'
   ],
-  testEnvironment: "node",
+  testEnvironment: 'node',
     testMatch: [
     '**/?(*.)(spec|test).js'
   ],
