@@ -1,6 +1,4 @@
 /* @flow */
-"use strict";
-
 const os = require("os");
 
 // This function simply provides roundabout way of getting os.EOL

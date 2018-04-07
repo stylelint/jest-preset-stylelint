@@ -57,6 +57,9 @@
     "extends": [
       "stylelint"
     ],
+    "parserOptions": {
+      "sourceType": "module"
+    },
     "rules": {
       "node/no-unpublished-require": "off"
     }

@@ -1,5 +1,3 @@
-"use strict";
-
 const _ = require("lodash");
 const basicChecks = require("stylelint").basicChecks;
 const less = require("postcss-less");
