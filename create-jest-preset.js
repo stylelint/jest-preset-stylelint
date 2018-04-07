@@ -21,9 +21,6 @@ const jestBasePreset = {
   moduleFileExtensions: [
     'js',
   ],
-  setupFiles: [
-    '<rootDir>/node_modules/jest-preset-stylelint/jest-setup.js'
-  ],
   testEnvironment: 'node',
     testMatch: [
     '**/?(*.)(spec|test).js'
