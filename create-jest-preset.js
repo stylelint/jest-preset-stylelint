@@ -31,4 +31,4 @@ const jestPreset = {
   verbose: true
 };
 
-fs.writeFileSync('jest-preset.json', JSON.stringify(jestPreset, null, 2));
+fs.writeFileSync('jest-preset.json', JSON.stringify(jestPreset, null, 2) + '\n', 'utf8');
