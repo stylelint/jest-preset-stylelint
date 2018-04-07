@@ -2,7 +2,7 @@
 
 const fs = require('fs');
 
-const jestPreset = {
+const jestBasePreset = {
   clearMocks: true,
   collectCoverage: false,
   coverageDirectory: './.coverage/',
@@ -31,4 +31,4 @@ const jestPreset = {
   verbose: true
 };
 
-fs.writeFileSync('jest-preset.json', JSON.stringify(jestPreset, null, 2) + '\n', 'utf8');
+fs.writeFileSync('jest-preset.json', JSON.stringify(jestBasePreset, null, 2) + '\n', 'utf8');
