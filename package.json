@@ -17,8 +17,7 @@
   "files": [
     "create-jest-preset.js",
     "getOsEol.js",
-    "jest-setup.js",
-    "jest-preset.json"
+    "jest-setup.js"
   ],
   "engines": {
     "node": ">=6"
