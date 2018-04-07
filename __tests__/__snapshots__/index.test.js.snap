@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`it contains expected keys 1`] = `
+exports[`should contain expected keys 1`] = `
 Array [
   "clearMocks",
   "collectCoverage",
