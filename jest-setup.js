@@ -1,136 +1,162 @@
-const _ = require("lodash");
-const basicChecks = require("stylelint").basicChecks;
-const less = require("postcss-less");
-const stylelint = require("stylelint").standalone;
+'use strict';
 
+const basicChecks = require('stylelint').basicChecks;
+const stylelint = require('stylelint').lint;
+const util = require('util');
 
-jest.mock("./getOsEol.js", () => () => "\n");
+jest.mock('./getOsEol', () => () => '\n');
 
 global.testRule = (rule, schema) => {
-  expect.extend({
-    toHaveMessage(testCase) {
-      if (testCase.message === undefined) {
-        return {
-          message: () =>
-            'Expected "reject" test case to have a "message" property',
-          pass: false
-        };
-      }
+	describe(`${schema.ruleName}`, () => {
+		const stylelintConfig = {
+			plugins: schema.plugins,
+			rules: {
+				[schema.ruleName]: schema.config,
+			},
+		};
 
-      return {
-        pass: true
-      };
-    }
-  });
+		let passingTestCases = schema.accept || [];
 
-  describe(schema.ruleName, () => {
-    const stylelintConfig = {
-      rules: {
-        [schema.ruleName]: schema.config
-      }
-    };
+		if (!schema.skipBasicChecks) {
+			passingTestCases = passingTestCases.concat(basicChecks);
+		}
 
-    let passingTestCases = schema.accept || [];
-    if (!schema.skipBasicChecks) {
-      passingTestCases = passingTestCases.concat(basicChecks);
-    }
+		setupTestCases({
+			name: 'accept',
+			cases: passingTestCases,
+			schema,
+			comparisons: (testCase) => async () => {
+				const options = {
+					code: testCase.code,
+					config: stylelintConfig,
+					syntax: schema.syntax,
+				};
 
-    if (passingTestCases && passingTestCases.length) {
-      describe("accept", () => {
-        passingTestCases.forEach(testCase => {
-          const spec = testCase.only ? it.only : it;
-          describe(JSON.stringify(schema.config, replacer), () => {
-            describe(JSON.stringify(testCase.code), () => {
-              spec(testCase.description || "no description", () => {
-                const options = {
-                  code: testCase.code,
-                  config: stylelintConfig,
-                  syntax: schema.syntax
-                };
-                return stylelint(options).then(output => {
-                  expect(output.results[0].warnings).toEqual([]);
-                  expect(output.results[0].parseErrors).toEqual([]);
-                  if (!schema.fix) return;
+				const output = await stylelint(options);
 
-                  // Check the fix
-                  return stylelint(Object.assign({ fix: true }, options)).then(
-                    output => {
-                      const fixedCode = getOutputCss(output);
-                      expect(fixedCode).toBe(testCase.code);
-                    }
-                  );
-                });
-              });
-            });
-          });
-        });
-      });
-    }
+				expect(output.results[0].warnings).toEqual([]);
+				expect(output.results[0].parseErrors).toEqual([]);
 
-    if (schema.reject && schema.reject.length) {
-      describe("reject", () => {
-        schema.reject.forEach(testCase => {
-          const spec = testCase.only ? it.only : it;
-          describe(JSON.stringify(schema.config, replacer), () => {
-            describe(JSON.stringify(testCase.code), () => {
-              spec(testCase.description || "no description", () => {
-                const options = {
-                  code: testCase.code,
-                  config: stylelintConfig,
-                  syntax: schema.syntax
-                };
-                return stylelint(options).then(output => {
-                  const warning = output.results[0].warnings[0];
+				if (!schema.fix) return;
 
-                  expect(output.results[0].parseErrors).toEqual([]);
-                  expect(testCase).toHaveMessage();
+				// Check that --fix doesn't change code
+				const outputAfterFix = await stylelint({ ...options, fix: true });
+				const fixedCode = getOutputCss(outputAfterFix);
 
-                  if (testCase.message !== undefined) {
-                    expect(_.get(warning, "text")).toBe(testCase.message);
-                  }
-                  if (testCase.line !== undefined) {
-                    expect(_.get(warning, "line")).toBe(testCase.line);
-                  }
-                  if (testCase.column !== undefined) {
-                    expect(_.get(warning, "column")).toBe(testCase.column);
-                  }
+				expect(fixedCode).toBe(testCase.code);
+			},
+		});
 
-                  if (!schema.fix) return;
+		setupTestCases({
+			name: 'reject',
+			cases: schema.reject,
+			schema,
+			comparisons: (testCase) => async () => {
+				const options = {
+					code: testCase.code,
+					config: stylelintConfig,
+					syntax: schema.syntax,
+				};
 
-                  if (!testCase.fixed) {
-                    throw new Error(
-                      "If using { fix: true } in test schema, all reject cases must have { fixed: .. }"
-                    );
-                  }
+				const outputAfterLint = await stylelint(options);
 
-                  // Check the fix
-                  return stylelint(Object.assign({ fix: true }, options)).then(
-                    output => {
-                      const fixedCode = getOutputCss(output);
-                      expect(fixedCode).toBe(testCase.fixed);
-                      expect(fixedCode).not.toBe(testCase.code);
-                    }
-                  );
-                });
-              });
-            });
-          });
-        });
-      });
-    }
-  });
+				const actualWarnings = outputAfterLint.results[0].warnings;
+
+				expect(outputAfterLint.results[0].parseErrors).toEqual([]);
+				expect(actualWarnings).toHaveLength(testCase.warnings ? testCase.warnings.length : 1);
+
+				(testCase.warnings || [testCase]).forEach((expected, i) => {
+					const warning = actualWarnings[i];
+
+					expect(expected).toHaveMessage();
+
+					expect(warning.text).toBe(expected.message);
+
+					if (expected.line !== undefined) {
+						expect(warning.line).toBe(expected.line);
+					}
+
+					if (expected.column !== undefined) {
+						expect(warning.column).toBe(expected.column);
+					}
+				});
+
+				if (!schema.fix) return;
+
+				// Check that --fix doesn't change code
+				if (schema.fix && !testCase.fixed && testCase.fixed !== '' && !testCase.unfixable) {
+					throw new Error(
+						'If using { fix: true } in test schema, all reject cases must have { fixed: .. }',
+					);
+				}
+
+				const outputAfterFix = await stylelint({ ...options, fix: true });
+
+				const fixedCode = getOutputCss(outputAfterFix);
+
+				if (!testCase.unfixable) {
+					expect(fixedCode).toBe(testCase.fixed);
+					expect(fixedCode).not.toBe(testCase.code);
+				} else {
+					// can't fix
+					if (testCase.fixed) {
+						expect(fixedCode).toBe(testCase.fixed);
+					}
+
+					expect(fixedCode).toBe(testCase.code);
+				}
+
+				// Checks whether only errors other than those fixed are reported
+				const outputAfterLintOnFixedCode = await stylelint({
+					...options,
+					code: fixedCode,
+				});
+
+				expect(outputAfterLintOnFixedCode.results[0].warnings).toEqual(
+					outputAfterFix.results[0].warnings,
+				);
+				expect(outputAfterLintOnFixedCode.results[0].parseErrors).toEqual([]);
+			},
+		});
+	});
+
+	expect.extend({
+		toHaveMessage(testCase) {
+			if (testCase.message === undefined) {
+				return {
+					message: () => 'Expected "reject" test case to have a "message" property',
+					pass: false,
+				};
+			}
+
+			return {
+				pass: true,
+			};
+		},
+	});
 };
 
-function getOutputCss(output) {
-  const result = output.results[0]._postcssResult;
-  const css = result.root.toString(result.opts.syntax);
-  if (result.opts.syntax === less) {
-    // Less needs us to manually strip whitespace at the end of single-line comments ¯\_(ツ)_/¯
-    return css.replace(/(\n?\s*\/\/.*?)[ \t]*(\r?\n)/g, "$1$2");
-  }
-  return css;
+function setupTestCases({ name, cases, schema, comparisons }) {
+	if (cases && cases.length) {
+		describe(name, () => {
+			cases.forEach((testCase) => {
+				if (testCase) {
+					const spec = testCase.only ? it.only : testCase.skip ? it.skip : it;
+
+					describe(`${util.inspect(schema.config)}`, () => {
+						describe(`${util.inspect(testCase.code)}`, () => {
+							spec(testCase.description || 'no description', comparisons(testCase));
+						});
+					});
+				}
+			});
+		});
+	}
 }
 
-function replacer(key, value) {
-  return value instanceof RegExp ? `[RegExp] ${value.toString()}` : value;
+function getOutputCss(output) {
+	const result = output.results[0]._postcssResult;
+	const css = result.root.toString(result.opts.syntax);
+
+	return css;
 }

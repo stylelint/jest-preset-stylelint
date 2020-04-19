@@ -1,13 +1,7 @@
-const preset = require("../jest-preset.json");
-it('should contain expected keys', () => {
-  expect(Object.keys(preset)).toMatchSnapshot();
-});
+'use strict';
 
-it("should match .js extension files", () => {
-  expect(preset.moduleFileExtensions).toEqual([
-    "js",
-    "json",
-    "jsx",
-    "node"
-  ]);
+const preset = require('../jest-preset.js');
+
+it('should contain expected keys', () => {
+	expect(Object.keys(preset)).toMatchSnapshot();
 });
