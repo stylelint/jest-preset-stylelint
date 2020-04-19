@@ -59,7 +59,7 @@
     "stylelint": "^13.3.2"
   },
   "peerDependencies": {
-    "jest": ">=22",
+    "jest": "^25.3.0",
     "stylelint": "^13.0.0"
   },
   "engines": {
