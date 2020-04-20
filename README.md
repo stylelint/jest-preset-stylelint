@@ -30,10 +30,9 @@ For example, we can test a plugin that enforces and autofixes kebab-case class s
 
 ```js
 // my-plugin.test.js
-const rule = require(".");
-const { messages, ruleName } = rule;
+const { messages, ruleName } = require(".");
 
-testRule(rule, {
+testRule({
   plugins: ["."],
   ruleName,
   config: [true, { type: "kebab" }],

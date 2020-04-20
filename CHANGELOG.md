@@ -5,6 +5,7 @@
 - Removed: support for stylelint versions less than 13.
 - Removed: support for node@8.
 - Removed: settings not related to plugin testing.
+- Changed: `testRule` signature to only accept `schema` as argument.
 - Added: `warnings` to `reject` schema property.
 - Added: `plugins` schema property.
 - Added: `only` schema property.

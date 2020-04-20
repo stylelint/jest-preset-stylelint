@@ -6,7 +6,7 @@ const util = require('util');
 
 jest.mock('./getOsEol', () => () => '\n');
 
-global.testRule = (rule, schema) => {
+global.testRule = (schema) => {
 	describe(`${schema.ruleName}`, () => {
 		const stylelintConfig = {
 			plugins: schema.plugins,
