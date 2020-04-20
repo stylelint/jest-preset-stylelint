@@ -107,7 +107,7 @@ If you're testing a plugin pack, it's the path to the file that exports the arra
 
 Reject test cases.
 
-### `rulename` \[string\]
+### `ruleName` \[string\]
 
 Name of the rule being tested. Usually exported from the plugin.
 
