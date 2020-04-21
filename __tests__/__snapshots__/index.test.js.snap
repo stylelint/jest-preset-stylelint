@@ -2,14 +2,7 @@
 
 exports[`should contain expected keys 1`] = `
 Array [
-  "clearMocks",
-  "collectCoverage",
-  "coverageDirectory",
-  "coverageReporters",
-  "coverageThreshold",
-  "moduleFileExtensions",
+  "setupFiles",
   "testEnvironment",
-  "testMatch",
-  "verbose",
 ]
 `;
