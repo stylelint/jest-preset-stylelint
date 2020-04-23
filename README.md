@@ -14,6 +14,8 @@ npm install jest-preset-stylelint jest stylelint --save-dev
 
 ## Setup
 
+### Simple setup
+
 Add the preset to your `jest.config.js` or `jest` field in `package.json`:
 
 ```json
@@ -21,6 +23,27 @@ Add the preset to your `jest.config.js` or `jest` field in `package.json`:
   "preset": "jest-preset-stylelint"
 }
 ```
+
+### Advanced setup
+
+Plugins, which have many tests, could benefit from not specifying `plugins` in every schema.
+
+1. Create `jest.setup.js` in the root of your project. Provide [`plugins`](#plugins-arraystring) option to `getTestRule()`:
+
+    ```js
+    const stylelint = require('stylelint');
+    const getTestRule = require('jest-preset-stylelint/getTestRule');
+
+    global.testRule = getTestRule(stylelint, { plugins: ['./'] });
+    ```
+
+2. Add `jest.setup.js` to your `jest.config.js` or `jest` field in `package.json`:
+
+    ```json
+    {
+      "setupFiles": ["jest.setup.js"]
+    }
+    ```
 
 ## Usage
 
@@ -99,9 +122,11 @@ Turn on autofix.
 
 Maps to stylelint's [`plugins` configuration property](https://stylelint.io/user-guide/configure#plugins).
 
-Path to the file that exports the plugin object, relative to the root.
+Path to the file that exports the plugin object, relative to the root. Usually it's the same path as a `main` property in plugin's `package.json`.
 
 If you're testing a plugin pack, it's the path to the file that exports the array of plugin objects.
+
+Optional, if `plugins` option was passed to advanced configuration with `getTestRule()`.
 
 ### `reject` \[array\<Object\>\]
 

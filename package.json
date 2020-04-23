@@ -13,6 +13,7 @@
   "author": "stylelint",
   "files": [
     "getOsEol.js",
+    "getTestRule.js",
     "jest-preset.js",
     "jest-setup.js"
   ],
