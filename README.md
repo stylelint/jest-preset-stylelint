@@ -14,8 +14,6 @@ npm install jest-preset-stylelint jest stylelint --save-dev
 
 ## Setup
 
-### Simple setup
-
 Add the preset to your `jest.config.js` or `jest` field in `package.json`:
 
 ```json
@@ -24,9 +22,7 @@ Add the preset to your `jest.config.js` or `jest` field in `package.json`:
 }
 ```
 
-### Advanced setup
-
-Plugins, which have many tests, could benefit from not specifying `plugins` in every schema.
+Optionally, you can avoid specifying `plugins` in every schema by defining your own setup file to configure the `testRule` function. This is useful if you have many tests. There are two additional steps to do this:
 
 1. Create `jest.setup.js` in the root of your project. Provide [`plugins`](#plugins-arraystring) option to `getTestRule()`:
 
@@ -41,6 +37,7 @@ Plugins, which have many tests, could benefit from not specifying `plugins` in e
 
    ```json
    {
+     "preset": "jest-preset-stylelint",
      "setupFiles": ["jest.setup.js"]
    }
    ```
