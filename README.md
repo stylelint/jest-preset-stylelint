@@ -22,6 +22,26 @@ Add the preset to your `jest.config.js` or `jest` field in `package.json`:
 }
 ```
 
+Optionally, you can avoid specifying `plugins` in every schema by defining your own setup file to configure the `testRule` function. This is useful if you have many tests. There are two additional steps to do this:
+
+1. Create `jest.setup.js` in the root of your project. Provide [`plugins`](#plugins-arraystring) option to `getTestRule()`:
+
+   ```js
+   const stylelint = require("stylelint");
+   const getTestRule = require("jest-preset-stylelint/getTestRule");
+
+   global.testRule = getTestRule(stylelint, { plugins: ["./"] });
+   ```
+
+2. Add `jest.setup.js` to your `jest.config.js` or `jest` field in `package.json`:
+
+   ```json
+   {
+     "preset": "jest-preset-stylelint",
+     "setupFiles": ["jest.setup.js"]
+   }
+   ```
+
 ## Usage
 
 The preset exposes a global `testRule` function that you can use to efficiently test your plugin using a schema.
@@ -99,9 +119,11 @@ Turn on autofix.
 
 Maps to stylelint's [`plugins` configuration property](https://stylelint.io/user-guide/configure#plugins).
 
-Path to the file that exports the plugin object, relative to the root.
+Path to the file that exports the plugin object, relative to the root. Usually it's the same path as a `main` property in plugin's `package.json`.
 
 If you're testing a plugin pack, it's the path to the file that exports the array of plugin objects.
+
+Optional, if `plugins` option was passed to advanced configuration with `getTestRule()`.
 
 ### `reject` \[array\<Object\>\]
 
