@@ -1,11 +1,9 @@
 'use strict';
 
 const util = require('util');
+const { basicChecks, lint } = require('stylelint');
 
-function getTestRule(injectedStylelint, options = {}) {
-	const basicChecks = injectedStylelint.basicChecks;
-	const stylelint = injectedStylelint.lint;
-
+function getTestRule(options = {}) {
 	return function testRule(schema) {
 		describe(`${schema.ruleName}`, () => {
 			const stylelintConfig = {
@@ -32,7 +30,7 @@ function getTestRule(injectedStylelint, options = {}) {
 						syntax: schema.syntax,
 					};
 
-					const output = await stylelint(options);
+					const output = await lint(options);
 
 					expect(output.results[0].warnings).toEqual([]);
 					expect(output.results[0].parseErrors).toEqual([]);
@@ -40,7 +38,7 @@ function getTestRule(injectedStylelint, options = {}) {
 					if (!schema.fix) return;
 
 					// Check that --fix doesn't change code
-					const outputAfterFix = await stylelint({ ...options, fix: true });
+					const outputAfterFix = await lint({ ...options, fix: true });
 					const fixedCode = getOutputCss(outputAfterFix);
 
 					expect(fixedCode).toBe(testCase.code);
@@ -58,7 +56,7 @@ function getTestRule(injectedStylelint, options = {}) {
 						syntax: schema.syntax,
 					};
 
-					const outputAfterLint = await stylelint(options);
+					const outputAfterLint = await lint(options);
 
 					const actualWarnings = outputAfterLint.results[0].warnings;
 
@@ -90,7 +88,7 @@ function getTestRule(injectedStylelint, options = {}) {
 						);
 					}
 
-					const outputAfterFix = await stylelint({ ...options, fix: true });
+					const outputAfterFix = await lint({ ...options, fix: true });
 
 					const fixedCode = getOutputCss(outputAfterFix);
 
@@ -107,7 +105,7 @@ function getTestRule(injectedStylelint, options = {}) {
 					}
 
 					// Checks whether only errors other than those fixed are reported
-					const outputAfterLintOnFixedCode = await stylelint({
+					const outputAfterLintOnFixedCode = await lint({
 						...options,
 						code: fixedCode,
 					});
