@@ -27,10 +27,9 @@ Optionally, you can avoid specifying `plugins` in every schema by defining your 
 1. Create `jest.setup.js` in the root of your project. Provide [`plugins`](#plugins-arraystring) option to `getTestRule()`:
 
    ```js
-   const stylelint = require("stylelint");
    const getTestRule = require("jest-preset-stylelint/getTestRule");
 
-   global.testRule = getTestRule(stylelint, { plugins: ["./"] });
+   global.testRule = getTestRule({ plugins: ["./"] });
    ```
 
 2. Add `jest.setup.js` to your `jest.config.js` or `jest` field in `package.json`:

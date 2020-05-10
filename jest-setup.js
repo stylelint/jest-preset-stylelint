@@ -1,6 +1,8 @@
 'use strict';
 
-const getTestRule = require('./getTestRule');
-const stylelint = require('stylelint');
+// Mock should be before stylelint required. Even if it's required inside other modules
+jest.mock('stylelint/lib/utils/getOsEol', () => () => '\n');
 
-global.testRule = getTestRule(stylelint);
+const getTestRule = require('./getTestRule');
+
+global.testRule = getTestRule();
