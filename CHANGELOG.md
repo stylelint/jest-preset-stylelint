@@ -1,5 +1,10 @@
 # Changelog
 
+## 3.0.0
+
+- Changed: `getTestRule` signature to only accept options as argument.
+- Added: support for Jest 26.0.1+.
+
 ## 2.0.0
 
 - Removed: support for stylelint versions less than 13.
