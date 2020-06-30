@@ -46,6 +46,10 @@
       "@stylelint/remark-preset"
     ]
   },
+  "dependencies": {
+    "@types/jest": "^26.0.3",
+    "postcss": "^7.0.32"
+  },
   "devDependencies": {
     "@stylelint/prettier-config": "^2.0.0",
     "@stylelint/remark-preset": "^1.0.0",

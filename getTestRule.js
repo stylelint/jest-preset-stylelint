@@ -3,6 +3,65 @@
 const util = require('util');
 const { basicChecks, lint } = require('stylelint');
 
+/**
+ * @typedef {object} StylelintWarning - https://github.com/stylelint/stylelint/blob/master/types/stylelint/index.d.ts#L186
+ * @property {number} SetupTestCasesProps.line
+ * @property {number} SetupTestCasesProps.column
+ * @property {string} SetupTestCasesProps.rule
+ * @property {string} SetupTestCasesProps.severity
+ * @property {string} SetupTestCasesProps.text
+ * @property {string} SetupTestCasesProps.stylelintType
+ */
+
+/**
+ * Used by accept and reject.
+ * @typedef {object} TestCasePropsBase
+ * @property {string} SetupTestCasesProps.code
+ * @property {string} SetupTestCasesProps.description
+ * @property {boolean} SetupTestCasesProps.skip
+ * @property {boolean} SetupTestCasesProps.only
+ */
+
+/**
+ * @typedef {object} _TestCasePropsReject
+ * @property {number} SetupTestCasesProps.column
+ * @property {string} SetupTestCasesProps.fixed
+ * @property {number} SetupTestCasesProps.line
+ * @property {string} SetupTestCasesProps.message
+ * @property {boolean} SetupTestCasesProps.unfixable
+ * @property {StylelintWarning[]} SetupTestCasesProps.warnings - https://github.com/stylelint/stylelint/blob/master/types/stylelint/index.d.ts#L206
+ */
+
+/**
+ * @typedef {TestCasePropsBase & _TestCasePropsReject} TestCasePropsReject
+ */
+
+/**
+ * @typedef {object} GetTestRuleParam
+ * @property {string[]} GetTestRuleParam.plugins
+ */
+
+/**
+ * @typedef {function(TestRuleSchema)} GetTestRuleReturnValue
+ */
+
+/**
+ * @typedef {object} TestRuleSchema
+ * @property {string[]} TestRuleSchema.plugins
+ * @property {string} TestRuleSchema.ruleName
+ * @property {any | [any, Object]} TestRuleSchema.config - https://github.com/stylelint/stylelint/blob/master/types/stylelint/index.d.ts#L9
+ * @property {boolean} TestRuleSchema.fix
+ * @property {TestCasePropsBase[]} TestRuleSchema.accept
+ * @property {TestCasePropsReject[]} TestRuleSchema.reject
+ * @property {boolean} TestRuleSchema.skipBasicChecks
+ * @property {string} TestRuleSchema.syntax
+ */
+
+/**
+ *
+ * @param {GetTestRuleParam} options
+ * @returns {GetTestRuleReturnValue}
+ */
 function getTestRule(options = {}) {
 	return function testRule(schema) {
 		describe(`${schema.ruleName}`, () => {
@@ -135,6 +194,18 @@ function getTestRule(options = {}) {
 	};
 }
 
+/**
+ * @typedef {object} SetupTestCasesParam
+ * @property {string} SetupTestCasesParam.name
+ * @property {TestCasePropsBase[]} SetupTestCasesParam.cases
+ * @property {TestRuleSchema} SetupTestCasesParam.schema
+ * @property {function(TestCasePropsBase)} SetupTestCasesParam.comparisons
+ */
+
+/**
+ * @param {SetupTestCasesParam}
+ * @returns {void}
+ */
 function setupTestCases({ name, cases, schema, comparisons }) {
 	if (cases && cases.length) {
 		describe(name, () => {
@@ -153,6 +224,43 @@ function setupTestCases({ name, cases, schema, comparisons }) {
 	}
 }
 
+/**
+ * @typedef {object} StylelintResult - https://github.com/stylelint/stylelint/blob/master/types/stylelint/index.d.ts#L195
+ * @property {string} GetOutputCssParam.source
+ * @property {{text: string, reference: string}[]} GetOutputCssParam.deprecations
+ * @property {{text: string}[]} GetOutputCssParam.invalidOptionWarnings
+ * @property {import('postcss').Warning & {stylelintType: string}} GetOutputCssParam.parseErrors
+ * @property {boolean} GetOutputCssParam.errored
+ * @property {StylelintWarning[]} GetOutputCssParam.warnings
+ * @property {boolean} GetOutputCssParam.ignored
+ * @property {any} GetOutputCssParam._postcssResult // todo
+ */
+
+/**
+ * @typedef {object} StylelintDisableReportEntry - https://github.com/stylelint/stylelint/blob/master/types/stylelint/index.d.ts#L219
+ * @property {string} StylelintDisableReportEntry.source
+ * @property {{unusedRule: string, start: number, end: number}[]} StylelintDisableReportEntry.ranges
+ */
+
+/**
+ * @typedef {StylelintDisableReportEntry[]} StylelintDisableOptionsReport - https://github.com/stylelint/stylelint/blob/master/types/stylelint/index.d.ts#L254
+ */
+
+/**
+ * @typedef {object} GetOutputCssParam - https://github.com/stylelint/stylelint/blob/master/types/stylelint/index.d.ts#L228
+ * @property {StylelintResult[]} GetOutputCssParam.results
+ * @property {boolean} GetOutputCssParam.errored
+ * @property {any} GetOutputCssParam.output
+ * @property {{maxWarnings: number, foundWarnings: number}} GetOutputCssParam.maxWarningsExceeded
+ * @property {StylelintDisableOptionsReport} GetOutputCssParam.needlessDisables
+ * @property {StylelintDisableOptionsReport} GetOutputCssParam.invalidScopeDisables
+ */
+
+/**
+ *
+ * @param {GetOutputCssParam} output
+ * @returns {string}
+ */
 function getOutputCss(output) {
 	const result = output.results[0]._postcssResult;
 	const css = result.root.toString(result.opts.syntax);
