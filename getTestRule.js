@@ -11,6 +11,7 @@ function getTestRule(options = {}) {
 				rules: {
 					[schema.ruleName]: schema.config,
 				},
+				...schema.stylelintConfig,
 			};
 
 			let passingTestCases = schema.accept || [];
