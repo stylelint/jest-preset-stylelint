@@ -24,13 +24,13 @@ function getTestRule(options = {}) {
 				cases: passingTestCases,
 				schema,
 				comparisons: (testCase) => async () => {
-					const options = {
+					const stylelintOptions = {
 						code: testCase.code,
 						config: stylelintConfig,
 						syntax: schema.syntax,
 					};
 
-					const output = await lint(options);
+					const output = await lint(stylelintOptions);
 
 					expect(output.results[0].warnings).toEqual([]);
 					expect(output.results[0].parseErrors).toEqual([]);
@@ -38,7 +38,7 @@ function getTestRule(options = {}) {
 					if (!schema.fix) return;
 
 					// Check that --fix doesn't change code
-					const outputAfterFix = await lint({ ...options, fix: true });
+					const outputAfterFix = await lint({ ...stylelintOptions, fix: true });
 					const fixedCode = getOutputCss(outputAfterFix);
 
 					expect(fixedCode).toBe(testCase.code);
@@ -50,13 +50,13 @@ function getTestRule(options = {}) {
 				cases: schema.reject,
 				schema,
 				comparisons: (testCase) => async () => {
-					const options = {
+					const stylelintOptions = {
 						code: testCase.code,
 						config: stylelintConfig,
 						syntax: schema.syntax,
 					};
 
-					const outputAfterLint = await lint(options);
+					const outputAfterLint = await lint(stylelintOptions);
 
 					const actualWarnings = outputAfterLint.results[0].warnings;
 
@@ -88,7 +88,7 @@ function getTestRule(options = {}) {
 						);
 					}
 
-					const outputAfterFix = await lint({ ...options, fix: true });
+					const outputAfterFix = await lint({ ...stylelintOptions, fix: true });
 
 					const fixedCode = getOutputCss(outputAfterFix);
 
@@ -106,7 +106,7 @@ function getTestRule(options = {}) {
 
 					// Checks whether only errors other than those fixed are reported
 					const outputAfterLintOnFixedCode = await lint({
-						...options,
+						...stylelintOptions,
 						code: fixedCode,
 					});
 
@@ -137,7 +137,7 @@ function getTestRule(options = {}) {
 
 function setupTestCases({ name, cases, schema, comparisons }) {
 	if (cases && cases.length) {
-		describe(name, () => {
+		describe(`${name}`, () => {
 			cases.forEach((testCase) => {
 				if (testCase) {
 					const spec = testCase.only ? it.only : testCase.skip ? it.skip : it;
