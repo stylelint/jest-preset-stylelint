@@ -1,5 +1,10 @@
 # Changelog
 
+## 4.0.0
+
+- Removed: `syntax` schema property.
+- Added: `customSyntax` schema property.
+
 ## 3.0.0
 
 - Changed: `getTestRule` signature to only accept options as argument.
