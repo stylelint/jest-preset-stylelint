@@ -27,7 +27,7 @@ function getTestRule(options = {}) {
 					const stylelintOptions = {
 						code: testCase.code,
 						config: stylelintConfig,
-						syntax: schema.syntax,
+						customSyntax: schema.customSyntax,
 					};
 
 					const output = await lint(stylelintOptions);
@@ -53,7 +53,7 @@ function getTestRule(options = {}) {
 					const stylelintOptions = {
 						code: testCase.code,
 						config: stylelintConfig,
-						syntax: schema.syntax,
+						customSyntax: schema.customSyntax,
 					};
 
 					const outputAfterLint = await lint(stylelintOptions);

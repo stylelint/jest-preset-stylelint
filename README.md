@@ -138,9 +138,9 @@ Default: `false` (Optional).
 
 Skip [basic checks](https://github.com/stylelint/stylelint/blob/master/lib/testUtils/basicChecks.js), e.g. an empty source.
 
-### `syntax` \<string\>
+### `customSyntax` \<string\>
 
-Maps to stylelint's [`syntax` option](https://stylelint.io/user-guide/usage/options#syntax).
+Maps to stylelint's [`customSyntax` option](https://stylelint.io/user-guide/usage/options#customsyntax).
 
 ## Shared test case properties
 
