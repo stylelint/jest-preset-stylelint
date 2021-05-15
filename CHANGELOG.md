@@ -1,6 +1,6 @@
 # Changelog
 
-## Head
+## 4.1.0
 
 - Added: `only` and `skip` to test group.
 - Fixed: peer dependencies and engine range.
