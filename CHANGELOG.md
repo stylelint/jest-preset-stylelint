@@ -1,5 +1,9 @@
 # Changelog
 
+## Head
+
+- Added: `only` and `skip` to test group.
+
 ## 4.0.0
 
 - Removed: `syntax` schema property.
