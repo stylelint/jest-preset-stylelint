@@ -3,6 +3,7 @@
 ## Head
 
 - Added: `only` and `skip` to test group.
+- Fixed: peer dependencies and engine range.
 
 ## 4.0.0
 
