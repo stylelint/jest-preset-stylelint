@@ -3,7 +3,32 @@
 const util = require('util');
 const { basicChecks, lint } = require('stylelint');
 
+/**
+ * @typedef {Object} TestCase
+ * @property {string} code
+ * @property {string} [description]
+ * @property {boolean} [only]
+ * @property {boolean} [skip]
+ */
+
+/**
+ * @typedef {Object} TestSchema
+ * @property {string} ruleName
+ * @property {any} config
+ * @property {TestCase[]} accept
+ * @property {TestCase[]} reject
+ * @property {string | string[]} plugins
+ * @property {boolean} [skipBasicChecks]
+ * @property {boolean} [fix]
+ * @property {Syntax} [customSyntax] - PostCSS Syntax (https://postcss.org/api/#syntax)
+ * @property {boolean} [only]
+ * @property {boolean} [skip]
+ */
+
 function getTestRule(options = {}) {
+	/**
+	 * @param {TestSchema} schema
+	 */
 	return function testRule(schema) {
 		describe(`${schema.ruleName}`, () => {
 			const stylelintConfig = {
@@ -137,7 +162,9 @@ function getTestRule(options = {}) {
 
 function setupTestCases({ name, cases, schema, comparisons }) {
 	if (cases && cases.length) {
-		describe(`${name}`, () => {
+		const testGroup = schema.only ? describe.only : schema.skip ? describe.skip : describe;
+
+		testGroup(`${name}`, () => {
 			cases.forEach((testCase) => {
 				if (testCase) {
 					const spec = testCase.only ? it.only : testCase.skip ? it.skip : it;
