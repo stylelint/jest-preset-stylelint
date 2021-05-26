@@ -1,6 +1,7 @@
 'use strict';
 
 const util = require('util');
+// eslint-disable-next-line node/no-unpublished-require -- Avoid auto-install of `stylelint` peer dependency.
 const { basicChecks, lint } = require('stylelint');
 
 /**
