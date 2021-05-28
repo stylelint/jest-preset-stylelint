@@ -1,5 +1,9 @@
 # Changelog
 
+## 4.1.1
+
+- Fixed: peer dependency range for jest 27
+
 ## 4.1.0
 
 - Added: `only` and `skip` to test group.
