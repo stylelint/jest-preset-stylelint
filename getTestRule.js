@@ -22,6 +22,7 @@ const { basicChecks, lint } = require('stylelint');
  * @property {boolean} [skipBasicChecks]
  * @property {boolean} [fix]
  * @property {Syntax} [customSyntax] - PostCSS Syntax (https://postcss.org/api/#syntax)
+ * @property {string} [codeFilename]
  * @property {boolean} [only]
  * @property {boolean} [skip]
  */
@@ -54,6 +55,7 @@ function getTestRule(options = {}) {
 						code: testCase.code,
 						config: stylelintConfig,
 						customSyntax: schema.customSyntax,
+						codeFilename: schema.codeFilename,
 					};
 
 					const output = await lint(stylelintOptions);
@@ -80,6 +82,7 @@ function getTestRule(options = {}) {
 						code: testCase.code,
 						config: stylelintConfig,
 						customSyntax: schema.customSyntax,
+						codeFilename: schema.codeFilename,
 					};
 
 					const outputAfterLint = await lint(stylelintOptions);
