@@ -1,5 +1,9 @@
 # Changelog
 
+## 4.1.0
+
+- Added: `codeFilename` schema property.
+
 ## 4.1.1
 
 - Fixed: peer dependency range for jest 27
