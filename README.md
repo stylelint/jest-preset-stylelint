@@ -142,6 +142,10 @@ Skip [basic checks](https://github.com/stylelint/stylelint/blob/master/lib/testU
 
 Maps to stylelint's [`customSyntax` option](https://stylelint.io/user-guide/usage/options#customsyntax).
 
+### `codeFilename` \<string\>
+
+Maps to stylelint's [`codeFilename` option](https://stylelint.io/user-guide/usage/options#codefilename).
+
 ## Shared test case properties
 
 Used within both `accept` and `reject` test cases.
