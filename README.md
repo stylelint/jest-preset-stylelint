@@ -6,7 +6,7 @@
 
 ## Installation
 
-Install the preset alongside jest and stylelint:
+Install the preset alongside Jest and Stylelint:
 
 ```bash
 npm install jest-preset-stylelint jest stylelint --save-dev
@@ -116,7 +116,7 @@ Turn on autofix.
 
 ### `plugins` \[array\<string\>\]
 
-Maps to stylelint's [`plugins` configuration property](https://stylelint.io/user-guide/configure#plugins).
+Maps to Stylelint's [`plugins` configuration property](https://stylelint.io/user-guide/configure#plugins).
 
 Path to the file that exports the plugin object, relative to the root. Usually it's the same path as a `main` property in plugin's `package.json`.
 
@@ -140,11 +140,11 @@ Skip [basic checks](https://github.com/stylelint/stylelint/blob/master/lib/testU
 
 ### `customSyntax` \<string\>
 
-Maps to stylelint's [`customSyntax` option](https://stylelint.io/user-guide/usage/options#customsyntax).
+Maps to Stylelint's [`customSyntax` option](https://stylelint.io/user-guide/usage/options#customsyntax).
 
 ### `codeFilename` \<string\>
 
-Maps to stylelint's [`codeFilename` option](https://stylelint.io/user-guide/usage/options#codefilename).
+Maps to Stylelint's [`codeFilename` option](https://stylelint.io/user-guide/usage/options#codefilename).
 
 ## Shared test case properties
 
