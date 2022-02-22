@@ -5,16 +5,11 @@ const util = require('util');
 const { lint } = require('stylelint');
 
 /**
- * @typedef {jestPresetStylelint.TestCase} TestCase
- * @typedef {jestPresetStylelint.TestSchema} TestSchema
+ * @typedef {import('.').TestCase} TestCase
+ * @typedef {import('.').TestSchema} TestSchema
  */
 
-/**
- * @param {{
- *   plugins?: TestSchema['plugins'],
- * }} [options]
- * @returns {typeof jestPresetStylelint.testRule}
- */
+/** @type {import('.').getTestRule} */
 module.exports = function getTestRule(options = {}) {
 	return function testRule(schema) {
 		describe(`${schema.ruleName}`, () => {
