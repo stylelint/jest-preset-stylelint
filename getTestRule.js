@@ -2,35 +2,15 @@
 
 const util = require('util');
 // eslint-disable-next-line node/no-unpublished-require -- Avoid auto-install of `stylelint` peer dependency.
-const { basicChecks, lint } = require('stylelint');
+const { lint } = require('stylelint');
 
 /**
- * @typedef {Object} TestCase
- * @property {string} code
- * @property {string} [description]
- * @property {boolean} [only]
- * @property {boolean} [skip]
+ * @typedef {import('.').TestCase} TestCase
+ * @typedef {import('.').TestSchema} TestSchema
  */
 
-/**
- * @typedef {Object} TestSchema
- * @property {string} ruleName
- * @property {any} config
- * @property {TestCase[]} accept
- * @property {TestCase[]} reject
- * @property {string | string[]} plugins
- * @property {boolean} [skipBasicChecks]
- * @property {boolean} [fix]
- * @property {Syntax} [customSyntax] - PostCSS Syntax (https://postcss.org/api/#syntax)
- * @property {string} [codeFilename]
- * @property {boolean} [only]
- * @property {boolean} [skip]
- */
-
-function getTestRule(options = {}) {
-	/**
-	 * @param {TestSchema} schema
-	 */
+/** @type {import('.').getTestRule} */
+module.exports = function getTestRule(options = {}) {
 	return function testRule(schema) {
 		describe(`${schema.ruleName}`, () => {
 			const stylelintConfig = {
@@ -40,15 +20,9 @@ function getTestRule(options = {}) {
 				},
 			};
 
-			let passingTestCases = schema.accept || [];
-
-			if (!schema.skipBasicChecks) {
-				passingTestCases = passingTestCases.concat(basicChecks);
-			}
-
 			setupTestCases({
 				name: 'accept',
-				cases: passingTestCases,
+				cases: schema.accept,
 				schema,
 				comparisons: (testCase) => async () => {
 					const stylelintOptions = {
@@ -95,6 +69,7 @@ function getTestRule(options = {}) {
 					(testCase.warnings || [testCase]).forEach((expected, i) => {
 						const warning = actualWarnings[i];
 
+						// @ts-expect-error -- This is our custom matcher.
 						expect(expected).toHaveMessage();
 
 						expect(warning.text).toBe(expected.message);
@@ -105,6 +80,16 @@ function getTestRule(options = {}) {
 
 						if (expected.column !== undefined) {
 							expect(warning.column).toBe(expected.column);
+						}
+
+						if (expected.endLine !== undefined) {
+							// @ts-expect-error -- TODO: `warning.endLine` is not implemented. See stylelint/stylelint#5725
+							expect(warning.endLine).toBe(expected.endLine);
+						}
+
+						if (expected.endColumn !== undefined) {
+							// @ts-expect-error -- TODO: `warning.endColumn` is not implemented. See stylelint/stylelint#5725
+							expect(warning.endColumn).toBe(expected.endColumn);
 						}
 					});
 
@@ -157,13 +142,24 @@ function getTestRule(options = {}) {
 				}
 
 				return {
+					message: () => '',
 					pass: true,
 				};
 			},
 		});
 	};
-}
+};
 
+/**
+ * @template {TestCase} T
+ * @param {{
+ *   name: string,
+ *   cases: T[] | undefined,
+ *   schema: TestSchema,
+ *   comparisons: (testCase: T) => jest.ProvidesCallback,
+ * }} args
+ * @returns {void}
+ */
 function setupTestCases({ name, cases, schema, comparisons }) {
 	if (cases && cases.length) {
 		const testGroup = schema.only ? describe.only : schema.skip ? describe.skip : describe;
@@ -184,11 +180,16 @@ function setupTestCases({ name, cases, schema, comparisons }) {
 	}
 }
 
+/**
+ * @param {import('stylelint').LinterResult} output
+ * @returns {string}
+ */
 function getOutputCss(output) {
 	const result = output.results[0]._postcssResult;
-	const css = result.root.toString(result.opts.syntax);
 
-	return css;
+	if (result && result.root && result.opts) {
+		return result.root.toString(result.opts.syntax);
+	}
+
+	throw new TypeError('Invalid result');
 }
-
-module.exports = getTestRule;
