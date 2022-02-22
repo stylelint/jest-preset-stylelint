@@ -27,7 +27,7 @@ Optionally, you can avoid specifying `plugins` in every schema by defining your 
 1. Create `jest.setup.js` in the root of your project. Provide [`plugins`](#plugins-arraystring) option to `getTestRule()`:
 
    ```js
-   const getTestRule = require("jest-preset-stylelint/getTestRule");
+   const { getTestRule } = require("jest-preset-stylelint");
 
    global.testRule = getTestRule({ plugins: ["./"] });
    ```
@@ -75,7 +75,9 @@ testRule({
       description: "camel case class selector",
       message: messages.expected(),
       line: 1,
-      column: 1
+      column: 1,
+      endLine: 1,
+      endColumn: 8,
     },
     {
       code: ".MyClass,\n.MyOtherClass {}",
@@ -86,11 +88,15 @@ testRule({
           message: messages.expected(),
           line: 1,
           column: 1
+          endLine: 1,
+          endColumn: 8,
         },
         {
           message: messages.expected(),
           line: 2,
           column: 1
+          endLine: 2,
+          endColumn: 13,
         }
       ]
     }
@@ -158,13 +164,13 @@ Description of the test case.
 
 Default: `false` (Optional).
 
-Maps to Jest's [test.skip](https://jestjs.io/docs/en/api#testskipname-fn).
+Maps to Jest's [`test.skip`](https://jestjs.io/docs/en/api#testskipname-fn).
 
 ### `only` \[boolean\]
 
 Default: `false` (Optional).
 
-Maps to Jest's [test.only](https://jestjs.io/docs/en/api#testonlyname-fn-timeout).
+Maps to Jest's [`test.only`](https://jestjs.io/docs/en/api#testonlyname-fn-timeout).
 
 ## Reject test case properties
 
@@ -204,7 +210,7 @@ Don't check the `fixed` code.
 
 Optional if `message` is used.
 
-Warning Objects containing expected `message`, `line` and `column`.
+Warning objects containing expected `message`, `line` and `column`.
 
 ## [Changelog](CHANGELOG.md)
 
