@@ -2,7 +2,7 @@
 
 [![NPM version](https://img.shields.io/npm/v/jest-preset-stylelint.svg)](https://www.npmjs.org/package/jest-preset-stylelint) [![Build Status](https://github.com/stylelint/jest-preset-stylelint/workflows/CI/badge.svg)](https://github.com/stylelint/jest-preset-stylelint/actions)
 
-[Jest](https://facebook.github.io/jest/) preset for [stylelint](https://github.com/stylelint) plugins.
+[Jest](https://facebook.github.io/jest/) preset for [Stylelint](https://github.com/stylelint) plugins.
 
 ## Installation
 
@@ -77,7 +77,7 @@ testRule({
       line: 1,
       column: 1,
       endLine: 1,
-      endColumn: 8,
+      endColumn: 8
     },
     {
       code: ".MyClass,\n.MyOtherClass {}",
@@ -87,16 +87,16 @@ testRule({
         {
           message: messages.expected(),
           line: 1,
-          column: 1
+          column: 1,
           endLine: 1,
-          endColumn: 8,
+          endColumn: 8
         },
         {
           message: messages.expected(),
           line: 2,
-          column: 1
+          column: 1,
           endLine: 2,
-          endColumn: 13,
+          endColumn: 13
         }
       ]
     }
