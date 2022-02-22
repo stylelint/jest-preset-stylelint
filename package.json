@@ -20,8 +20,9 @@
     "format": "prettier . --write",
     "lint": "npm-run-all --parallel lint:*",
     "lint:formatting": "prettier . --check",
-    "lint:js": "eslint . ",
-    "lint:md": "remark . --quiet --frail ",
+    "lint:js": "eslint .",
+    "lint:md": "remark . --quiet --frail",
+    "lint:types": "tsc",
     "release": "np",
     "test": "jest",
     "watch": "jest --watch",
@@ -39,7 +40,9 @@
     "globals": {
       "module": true,
       "require": true
-    }
+    },
+    "reportUnusedDisableDirectives": true,
+    "root": true
   },
   "remarkConfig": {
     "plugins": [
