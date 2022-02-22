@@ -1,5 +1,11 @@
 # Changelog
 
+## 5.0.0
+
+- Removed: `skipBasicChecks` schema property.
+- Added: `endLine` and `endColumn` schema properties.
+- Added: TypeScript definitions.
+
 ## 4.2.0
 
 - Added: `codeFilename` schema property.
