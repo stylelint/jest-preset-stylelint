@@ -54,10 +54,14 @@ export type Warning = {
 	endColumn?: number;
 };
 
+/**
+ * Use the `warnings` property, rather than `message`, `line`, and `column`,
+ * if the test case is expected to produce more than one warning.
+ */
 export type RejectTestCase = TestCase &
 	Warning & {
 		/**
-		 * Expected fixed code of the test case.
+		 * Expected fixed code of the test case. Optional if `fix` isn't `true`.
 		 */
 		fixed?: string;
 
@@ -106,6 +110,7 @@ export type TestSchema = {
 	 * Usually it's the same path as a `main` property in plugin's `package.json`.
 	 *
 	 * If you're testing a plugin pack, it's the path to the file that exports the array of plugin objects.
+	 *
 	 * Optional, if `plugins` option was passed to advanced configuration with `getTestRule()`.
 	 *
 	 * @see https://stylelint.io/user-guide/configure#plugins
