@@ -8,8 +8,6 @@ const basicChecks = require('./basicChecks');
 
 /**
  * @typedef {jestPresetStylelint.TestCase} TestCase
- * @typedef {jestPresetStylelint.AcceptTestCase} AcceptTestCase
- * @typedef {jestPresetStylelint.RejectTestCase} RejectTestCase
  * @typedef {jestPresetStylelint.TestSchema} TestSchema
  */
 
