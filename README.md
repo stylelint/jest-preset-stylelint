@@ -24,7 +24,7 @@ Add the preset to your `jest.config.js` or `jest` field in `package.json`:
 
 Optionally, you can avoid specifying `plugins` in every schema by defining your own setup file to configure the `testRule` function. This is useful if you have many tests. There are two additional steps to do this:
 
-1. Create `jest.setup.js` in the root of your project. Provide [`plugins`](#plugins-arraystring) option to `getTestRule()`:
+1. Create `jest.setup.js` in the root of your project. Provide `plugins` option to `getTestRule()`:
 
    ```js
    const { getTestRule } = require("jest-preset-stylelint");
