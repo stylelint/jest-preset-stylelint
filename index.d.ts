@@ -150,3 +150,7 @@ export declare function testRule(schema: TestSchema): void;
  * Create a `testRule()` function with any specified plugins.
  */
 export function getTestRule(options?: { plugins?: TestSchema['plugins'] }): typeof testRule;
+
+declare global {
+	var testRule: typeof testRule;
+}

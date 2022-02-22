@@ -11,6 +11,7 @@
   "repository": "stylelint/jest-preset-stylelint",
   "license": "MIT",
   "author": "stylelint",
+  "main": "index.js",
   "types": "index.d.ts",
   "files": [
     "getTestRule.js",
