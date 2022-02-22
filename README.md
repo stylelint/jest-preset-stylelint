@@ -132,12 +132,6 @@ Reject test cases.
 
 Name of the rule being tested. Usually exported from the plugin.
 
-### `skipBasicChecks` \[boolean\]
-
-Default: `false` (Optional).
-
-Skip [basic checks](https://github.com/stylelint/stylelint/blob/master/lib/testUtils/basicChecks.js), e.g. an empty source.
-
 ### `customSyntax` \<string\>
 
 Maps to Stylelint's [`customSyntax` option](https://stylelint.io/user-guide/usage/options#customsyntax).

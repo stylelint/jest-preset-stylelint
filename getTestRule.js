@@ -4,8 +4,6 @@ const util = require('util');
 // eslint-disable-next-line node/no-unpublished-require -- Avoid auto-install of `stylelint` peer dependency.
 const { lint } = require('stylelint');
 
-const basicChecks = require('./basicChecks');
-
 /**
  * @typedef {jestPresetStylelint.TestCase} TestCase
  * @typedef {jestPresetStylelint.TestSchema} TestSchema
@@ -27,15 +25,9 @@ module.exports = function getTestRule(options = {}) {
 				},
 			};
 
-			let passingTestCases = schema.accept || [];
-
-			if (!schema.skipBasicChecks) {
-				passingTestCases = passingTestCases.concat(basicChecks);
-			}
-
 			setupTestCases({
 				name: 'accept',
-				cases: passingTestCases,
+				cases: schema.accept,
 				schema,
 				comparisons: (testCase) => async () => {
 					const stylelintOptions = {
