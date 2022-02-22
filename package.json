@@ -11,10 +11,12 @@
   "repository": "stylelint/jest-preset-stylelint",
   "license": "MIT",
   "author": "stylelint",
+  "types": "index.d.ts",
   "files": [
     "getTestRule.js",
     "jest-preset.js",
-    "jest-setup.js"
+    "jest-setup.js",
+    "index.d.ts"
   ],
   "scripts": {
     "format": "prettier . --write",
