@@ -3,14 +3,11 @@ name: CI
 on:
   push:
     branches:
-      - master
+      - main
       - 'dependabot/**'
   pull_request:
     branches:
       - '**'
-
-env:
-  CI: true
 
 jobs:
   lint:
