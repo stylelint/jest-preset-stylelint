@@ -1,5 +1,9 @@
 # Changelog
 
+## 5.0.1
+
+- Fixed: incorrect the `TestSchema.config` property type. 
+
 ## 5.0.0
 
 - Removed: `skipBasicChecks` schema property.
