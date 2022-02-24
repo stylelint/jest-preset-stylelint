@@ -86,7 +86,7 @@ export type TestSchema = {
 	/**
 	 * Config to pass to the rule.
 	 */
-	config: unknown[];
+	config: unknown;
 
 	/**
 	 * Accept test cases.
