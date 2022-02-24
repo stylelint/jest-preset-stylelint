@@ -2,7 +2,7 @@
 
 ## 5.0.1
 
-- Fixed: incorrect `TestSchema.config` property type. 
+- Fixed: incorrect `TestSchema.config` property type.
 
 ## 5.0.0
 
