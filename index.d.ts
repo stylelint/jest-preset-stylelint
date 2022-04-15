@@ -149,13 +149,13 @@ export type TestSchema = {
 /**
  * Test a rule with the specified schema.
  */
-export declare function testRule(schema: TestSchema): void;
+export type TestRule = (schema: TestSchema) => void;
 
 /**
  * Create a `testRule()` function with any specified plugins.
  */
-export function getTestRule(options?: { plugins?: TestSchema['plugins'] }): typeof testRule;
+export function getTestRule(options?: { plugins?: TestSchema['plugins'] }): TestRule;
 
 declare global {
-	var testRule: typeof testRule;
+	var testRule: TestRule;
 }
