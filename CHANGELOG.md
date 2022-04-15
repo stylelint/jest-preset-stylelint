@@ -1,5 +1,9 @@
 # Changelog
 
+## 5.0.2
+
+- Fixed: error in TypeScript definitions.
+
 ## 5.0.1
 
 - Fixed: incorrect `TestSchema.config` property type.
