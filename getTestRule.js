@@ -83,12 +83,10 @@ module.exports = function getTestRule(options = {}) {
 						}
 
 						if (expected.endLine !== undefined) {
-							// @ts-expect-error -- TODO: `warning.endLine` is not implemented. See stylelint/stylelint#5725
 							expect(warning.endLine).toBe(expected.endLine);
 						}
 
 						if (expected.endColumn !== undefined) {
-							// @ts-expect-error -- TODO: `warning.endColumn` is not implemented. See stylelint/stylelint#5725
 							expect(warning.endColumn).toBe(expected.endColumn);
 						}
 					});
