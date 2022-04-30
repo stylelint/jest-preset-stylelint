@@ -1,5 +1,9 @@
 # Changelog
 
+## 5.0.3
+
+- Fixed: peer dependency range for Jest 28.
+
 ## 5.0.2
 
 - Fixed: error in TypeScript definitions.
