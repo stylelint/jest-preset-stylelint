@@ -63,33 +63,30 @@ module.exports = function getTestRule(options = {}) {
 
 					const actualWarnings = outputAfterLint.results[0].warnings;
 
-					expect(outputAfterLint.results[0].parseErrors).toEqual([]);
+					expect(outputAfterLint.results[0]).toMatchObject({ parseErrors: [] });
 					expect(actualWarnings).toHaveLength(testCase.warnings ? testCase.warnings.length : 1);
 
-					(testCase.warnings || [testCase]).forEach((expected, i) => {
-						const warning = actualWarnings[i];
-
+					for (const [i, expected] of (testCase.warnings || [testCase]).entries()) {
 						// @ts-expect-error -- This is our custom matcher.
 						expect(expected).toHaveMessage();
 
-						expect(warning.text).toBe(expected.message);
+						const expectedWarning = {
+							text: expected.message,
+							line: expected.line,
+							column: expected.column,
+							endLine: expected.endLine,
+							endColumn: expected.endColumn,
+						};
 
-						if (expected.line !== undefined) {
-							expect(warning.line).toBe(expected.line);
+						for (const [key, value] of Object.entries(expectedWarning)) {
+							if (value === undefined) {
+								// @ts-expect-error -- Allow a partial object.
+								delete expectedWarning[key];
+							}
 						}
 
-						if (expected.column !== undefined) {
-							expect(warning.column).toBe(expected.column);
-						}
-
-						if (expected.endLine !== undefined) {
-							expect(warning.endLine).toBe(expected.endLine);
-						}
-
-						if (expected.endColumn !== undefined) {
-							expect(warning.endColumn).toBe(expected.endColumn);
-						}
-					});
+						expect(actualWarnings[i]).toMatchObject(expectedWarning);
+					}
 
 					if (!schema.fix) return;
 
@@ -122,10 +119,10 @@ module.exports = function getTestRule(options = {}) {
 						code: fixedCode,
 					});
 
-					expect(outputAfterLintOnFixedCode.results[0].warnings).toEqual(
-						outputAfterFix.results[0].warnings,
-					);
-					expect(outputAfterLintOnFixedCode.results[0].parseErrors).toEqual([]);
+					expect(outputAfterLintOnFixedCode.results[0]).toMatchObject({
+						warnings: outputAfterFix.results[0].warnings,
+						parseErrors: [],
+					});
 				},
 			});
 		});
