@@ -1,5 +1,9 @@
 # Changelog
 
+## 5.0.4
+
+- Fixed: readability of failure output using the Jest `.toMatchObject()` API.
+
 ## 5.0.3
 
 - Fixed: peer dependency range for Jest 28.
