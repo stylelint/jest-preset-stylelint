@@ -1,5 +1,10 @@
 # Changelog
 
+## 6.0.0
+
+- Removed: support for Jest less than `29.0.2` from peer dependencies.
+- Removed: support for Node.js less than `14.15.0`.
+
 ## 5.0.4
 
 - Fixed: readability of failure output using the Jest `.toMatchObject()` API.
