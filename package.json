@@ -1,6 +1,6 @@
 {
   "name": "jest-preset-stylelint",
-  "version": "5.0.4",
+  "version": "6.0.0",
   "description": "Jest preset for Stylelint plugins.",
   "keywords": [
     "stylelint",
