@@ -117,6 +117,7 @@ module.exports = function getTestRule(options = {}) {
 					const outputAfterLintOnFixedCode = await lint({
 						...stylelintOptions,
 						code: fixedCode,
+						fix: testCase.unfixable,
 					});
 
 					expect(outputAfterLintOnFixedCode.results[0]).toMatchObject({
