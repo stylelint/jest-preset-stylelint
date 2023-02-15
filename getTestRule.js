@@ -36,6 +36,7 @@ module.exports = function getTestRule(options = {}) {
 
 					expect(output.results[0].warnings).toEqual([]);
 					expect(output.results[0].parseErrors).toEqual([]);
+					expect(output.results[0].invalidOptionWarnings).toEqual([]);
 
 					if (!schema.fix) return;
 
@@ -61,7 +62,10 @@ module.exports = function getTestRule(options = {}) {
 
 					const outputAfterLint = await lint(stylelintOptions);
 
-					const actualWarnings = outputAfterLint.results[0].warnings;
+					const actualWarnings = [
+						...outputAfterLint.results[0].invalidOptionWarnings,
+						...outputAfterLint.results[0].warnings,
+					];
 
 					expect(outputAfterLint.results[0]).toMatchObject({ parseErrors: [] });
 					expect(actualWarnings).toHaveLength(testCase.warnings ? testCase.warnings.length : 1);
