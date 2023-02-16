@@ -1,5 +1,9 @@
 # Changelog
 
+## Head
+
+- Fixed: false negatives for `invalidOptionWarnings`.
+
 ## 6.0.0
 
 - Removed: support for Jest less than `29.0.2` from peer dependencies.
