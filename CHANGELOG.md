@@ -2,6 +2,7 @@
 
 ## Head
 
+- Added: support for custom unfixable error messages.
 - Fixed: false negatives for `invalidOptionWarnings`.
 
 ## 6.0.0
