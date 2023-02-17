@@ -1,8 +1,9 @@
 'use strict';
 
 const util = require('util');
-// eslint-disable-next-line node/no-unpublished-require -- Avoid auto-install of `stylelint` peer dependency.
-const { lint } = require('stylelint');
+
+// @ts-expect-error -- TS2614: Module '"stylelint"' has no exported member 'lint'. Did you mean to use 'import lint from "stylelint"' instead?
+const { lint } = require('stylelint'); // eslint-disable-line node/no-unpublished-require -- Avoid auto-install of `stylelint` peer dependency.
 
 /**
  * @typedef {import('.').TestCase} TestCase

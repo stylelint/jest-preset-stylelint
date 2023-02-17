@@ -1,6 +1,6 @@
 # Changelog
 
-## Head
+## 6.1.0
 
 - Added: support for custom unfixable error messages.
 - Fixed: false negatives for `invalidOptionWarnings`.
