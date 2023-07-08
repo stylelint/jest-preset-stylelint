@@ -2,7 +2,7 @@
 
 const util = require('util');
 
-const { lint } = require('stylelint'); // eslint-disable-line node/no-unpublished-require -- Avoid auto-install of `stylelint` peer dependency.
+const { lint } = require('stylelint'); // eslint-disable-line n/no-unpublished-require -- Avoid auto-install of `stylelint` peer dependency.
 
 /**
  * @typedef {import('.').TestCase} TestCase
