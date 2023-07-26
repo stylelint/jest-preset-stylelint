@@ -1,5 +1,9 @@
 # Changelog
 
+## Head
+
+- Fixed: tightly-coupled dependency on Stylelint's internal module `lib/utils/getOsEol`.
+
 ## 6.1.0
 
 - Added: support for custom unfixable error messages.

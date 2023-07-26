@@ -2,8 +2,6 @@
 
 const util = require('util');
 
-const { lint } = require('stylelint'); // eslint-disable-line n/no-unpublished-require -- Avoid auto-install of `stylelint` peer dependency.
-
 /**
  * @typedef {import('.').TestCase} TestCase
  * @typedef {import('.').TestSchema} TestSchema
@@ -12,6 +10,14 @@ const { lint } = require('stylelint'); // eslint-disable-line n/no-unpublished-r
 /** @type {import('.').getTestRule} */
 module.exports = function getTestRule(options = {}) {
 	return function testRule(schema) {
+		/** @type {import('stylelint').lint} */
+		let lint;
+
+		beforeAll(() => {
+			// eslint-disable-next-line n/no-unpublished-require -- Avoid auto-install of `stylelint` peer dependency.
+			lint = require('stylelint').lint;
+		});
+
 		describe(`${schema.ruleName}`, () => {
 			const stylelintConfig = {
 				plugins: options.plugins || schema.plugins,

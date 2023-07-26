@@ -3,6 +3,7 @@
 exports[`should contain expected keys 1`] = `
 [
   "setupFiles",
+  "setupFilesAfterEnv",
   "testEnvironment",
 ]
 `;
