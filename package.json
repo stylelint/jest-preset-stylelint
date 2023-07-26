@@ -17,6 +17,7 @@
     "getTestRule.js",
     "jest-preset.js",
     "jest-setup.js",
+    "jest-setup-after-env.js",
     "index.d.ts"
   ],
   "scripts": {
