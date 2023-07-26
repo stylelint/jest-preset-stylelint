@@ -1,5 +1,6 @@
 'use strict';
 
+const os = require('os');
 const util = require('util');
 
 /**
@@ -13,9 +14,20 @@ module.exports = function getTestRule(options = {}) {
 		/** @type {import('stylelint').lint} */
 		let lint;
 
+		const eolDescriptor = Object.getOwnPropertyDescriptor(os, 'EOL');
+
+		if (!eolDescriptor) throw new TypeError('`os` must have an `EOL` property');
+
 		beforeAll(() => {
 			// eslint-disable-next-line n/no-unpublished-require -- Avoid auto-install of `stylelint` peer dependency.
 			lint = require('stylelint').lint;
+
+			// NOTE: `jest.replaceProperty()` is unavailable for a read-only property.
+			Object.defineProperty(os, 'EOL', { ...eolDescriptor, value: '\n' });
+		});
+
+		afterAll(() => {
+			Object.defineProperty(os, 'EOL', eolDescriptor);
 		});
 
 		describe(`${schema.ruleName}`, () => {
