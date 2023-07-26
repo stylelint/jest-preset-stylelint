@@ -2,7 +2,7 @@
 
 ## Head
 
-- Removed: dependency on Stylelint's internal module `lib/utils/getOsEol`.
+- Fixed: tightly-coupled dependency on Stylelint's internal module `lib/utils/getOsEol`.
 
 ## 6.1.0
 
