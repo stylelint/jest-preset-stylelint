@@ -55,6 +55,10 @@
       "@stylelint/remark-preset"
     ]
   },
+  "jest": {
+    "preset": "./jest-preset.js",
+    "testRegex": ".*\\.test\\.js$"
+  },
   "devDependencies": {
     "@stylelint/prettier-config": "^3.0.0",
     "@stylelint/remark-preset": "^4.0.0",

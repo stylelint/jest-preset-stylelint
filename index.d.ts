@@ -89,6 +89,11 @@ export type TestSchema = {
 	config: unknown;
 
 	/**
+	 * Invalid configs to pass to the rule.
+	 */
+	invalidConfig?: unknown;
+
+	/**
 	 * Accept test cases.
 	 */
 	accept?: AcceptTestCase[];

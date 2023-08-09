@@ -55,6 +55,7 @@ testRule({
   plugins: ["."],
   ruleName,
   config: [true, { type: "kebab" }],
+  invalidConfig: [123],
   fix: true,
 
   accept: [
