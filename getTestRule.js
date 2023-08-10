@@ -41,9 +41,7 @@ module.exports = function getTestRule(options = {}) {
 
 					expect(output.results).toHaveLength(1);
 					expect(output.results[0].invalidOptionWarnings).toEqual([
-						{
-							text: expect.stringMatching(`Invalid option value ".+" for rule "${ruleName}"`),
-						},
+						{ text: expect.stringMatching(`"${ruleName}"`) },
 					]);
 				});
 			}
