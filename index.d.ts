@@ -156,28 +156,29 @@ export type TestRule = (schema: TestSchema) => void;
  */
 export function getTestRule(options?: { plugins?: TestSchema['plugins'] }): TestRule;
 
+export type ConfigCase = {
+	config: unknown;
+	description?: string;
+	only?: boolean;
+	skip?: boolean;
+};
+
 /**
- * Test invalid configurations for a rule.
+ * Test configurations for a rule.
  */
-export type TestInvalidRuleConfigs = (
+export type TestRuleConfigs = (
 	schema: Pick<TestSchema, 'ruleName' | 'plugins' | 'only' | 'skip'> & {
-		configs: {
-			config: unknown;
-			description?: string;
-			only?: boolean;
-			skip?: boolean;
-		}[];
+		accept?: ConfigCase[];
+		reject?: ConfigCase[];
 	},
 ) => void;
 
 /**
- * Create a `testInvalidRuleConfigs()` function with any specified plugins.
+ * Create a `testRuleConfigs()` function with any specified plugins.
  */
-export function getTestInvalidRuleConfigs(options?: {
-	plugins?: TestSchema['plugins'];
-}): TestInvalidRuleConfigs;
+export function getTestRuleConfigs(options?: { plugins?: TestSchema['plugins'] }): TestRuleConfigs;
 
 declare global {
 	var testRule: TestRule;
-	var testInvalidRuleConfigs: TestInvalidRuleConfigs;
+	var testRuleConfigs: TestRuleConfigs;
 }

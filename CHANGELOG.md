@@ -2,7 +2,7 @@
 
 ## Head
 
-- Added: `testInvalidRuleConfigs` function.
+- Added: `testRuleConfigs` function.
 
 ## 6.1.1
 

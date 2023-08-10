@@ -1,7 +1,7 @@
 'use strict';
 
 const getTestRule = require('./getTestRule.js');
-const getTestInvalidRuleConfigs = require('./getTestInvalidRuleConfigs.js');
+const getTestRuleConfigs = require('./getTestRuleConfigs.js');
 
 global.testRule = getTestRule();
-global.testInvalidRuleConfigs = getTestInvalidRuleConfigs();
+global.testRuleConfigs = getTestRuleConfigs();
