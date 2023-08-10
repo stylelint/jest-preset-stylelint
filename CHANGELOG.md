@@ -1,6 +1,6 @@
 # Changelog
 
-## Head
+## 6.2.0
 
 - Added: `testRuleConfigs` function.
 
