@@ -2,7 +2,7 @@
 
 [![NPM version](https://img.shields.io/npm/v/jest-preset-stylelint.svg)](https://www.npmjs.org/package/jest-preset-stylelint) [![Build Status](https://github.com/stylelint/jest-preset-stylelint/workflows/CI/badge.svg)](https://github.com/stylelint/jest-preset-stylelint/actions)
 
-[Jest](https://facebook.github.io/jest/) preset for [Stylelint](https://github.com/stylelint) plugins.
+[Jest](https://jestjs.io/) preset for [Stylelint](https://stylelint.io/) plugins.
 
 ## Installation
 
@@ -22,14 +22,16 @@ Add the preset to your `jest.config.js` or `jest` field in `package.json`:
 }
 ```
 
-Optionally, you can avoid specifying `plugins` in every schema by defining your own setup file to configure the `testRule` function. This is useful if you have many tests. There are two additional steps to do this:
+Optionally, you can avoid specifying `plugins` in every schema by defining your own setup file to configure the `testRule`/`testRuleConfigs` functions.
+This is useful if you have many tests. There are two additional steps to do this:
 
-1. Create `jest.setup.js` in the root of your project. Provide `plugins` option to `getTestRule()`:
+1. Create `jest.setup.js` in the root of your project. Provide `plugins` option to `getTestRule`/`getTestRuleConfigs`:
 
    ```js
    const { getTestRule } = require("jest-preset-stylelint");
 
    global.testRule = getTestRule({ plugins: ["./"] });
+   global.testRuleConfigs = getTestRuleConfigs({ plugins: ["./"] });
    ```
 
 2. Add `jest.setup.js` to your `jest.config.js` or `jest` field in `package.json`:
@@ -43,7 +45,13 @@ Optionally, you can avoid specifying `plugins` in every schema by defining your 
 
 ## Usage
 
-The preset exposes a global `testRule` function that you can use to efficiently test your plugin using a schema.
+This preset exposes the following global functions as a helper.
+
+See also the [type definitions](index.d.ts) for more details.
+
+### `testRule`
+
+The `testRule` function enables you to efficiently test your plugin using a schema.
 
 For example, we can test a plugin that enforces and autofixes kebab-case class selectors:
 
@@ -104,9 +112,34 @@ testRule({
 });
 ```
 
-## Schema properties
+### `testRuleConfigs`
 
-See the [type definitions](index.d.ts).
+The `testRuleConfigs` function enables you to test invalid configs for a rule.
+
+For example:
+
+```js
+testInvalidRuleConfigs({
+  plugins: ["."],
+  ruleName,
+
+  accept: [
+    {
+      config: "valid"
+    }
+  ],
+
+  reject: [
+    {
+      config: "invalid"
+    },
+    {
+      config: [/invalid/],
+      description: "regex is not allowed"
+    }
+  ]
+});
+```
 
 ## [Changelog](CHANGELOG.md)
 

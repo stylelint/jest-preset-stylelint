@@ -14,6 +14,7 @@
   "main": "index.js",
   "types": "index.d.ts",
   "files": [
+    "getTestRuleConfigs.js",
     "getTestRule.js",
     "jest-preset.js",
     "jest-setup.js",
@@ -54,6 +55,10 @@
     "plugins": [
       "@stylelint/remark-preset"
     ]
+  },
+  "jest": {
+    "preset": "./jest-preset.js",
+    "testRegex": ".*\\.test\\.js$"
   },
   "devDependencies": {
     "@stylelint/prettier-config": "^3.0.0",

@@ -1,5 +1,9 @@
 # Changelog
 
+## Head
+
+- Added: `testRuleConfigs` function.
+
 ## 6.1.1
 
 - Fixed: tightly-coupled dependency on Stylelint's internal module `lib/utils/getOsEol`.
