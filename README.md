@@ -22,14 +22,18 @@ Add the preset to your `jest.config.js` or `jest` field in `package.json`:
 }
 ```
 
-Optionally, you can avoid specifying `plugins` in every schema by defining your own setup file to configure the `testRule` function. This is useful if you have many tests. There are two additional steps to do this:
+Optionally, you can avoid specifying `plugins` in every schema by defining your own setup file to configure the `testRule`/`testInvalidRuleConfigs` functions.
+This is useful if you have many tests. There are two additional steps to do this:
 
-1. Create `jest.setup.js` in the root of your project. Provide `plugins` option to `getTestRule()`:
+1. Create `jest.setup.js` in the root of your project. Provide `plugins` option to `getTestRule`/`getTestInvalidRuleConfigs`:
 
    ```js
    const { getTestRule } = require("jest-preset-stylelint");
 
    global.testRule = getTestRule({ plugins: ["./"] });
+   global.testInvalidRuleConfigs = getTestInvalidRuleConfigs({
+     plugins: ["./"]
+   });
    ```
 
 2. Add `jest.setup.js` to your `jest.config.js` or `jest` field in `package.json`:
@@ -43,7 +47,13 @@ Optionally, you can avoid specifying `plugins` in every schema by defining your 
 
 ## Usage
 
-The preset exposes a global `testRule` function that you can use to efficiently test your plugin using a schema.
+This preset exposes the following global functions as a helper.
+
+See also the [type definitions](index.d.ts) for more details.
+
+### `testRule`
+
+The `testRule` function enables you to efficiently test your plugin using a schema.
 
 For example, we can test a plugin that enforces and autofixes kebab-case class selectors:
 
@@ -55,7 +65,6 @@ testRule({
   plugins: ["."],
   ruleName,
   config: [true, { type: "kebab" }],
-  invalidConfig: [123],
   fix: true,
 
   accept: [
@@ -105,9 +114,28 @@ testRule({
 });
 ```
 
-## Schema properties
+### `testInvalidRuleConfigs`
 
-See the [type definitions](index.d.ts).
+The `testInvalidRuleConfigs` function enables you to test invalid configs for a rule.
+
+For example:
+
+```js
+testInvalidRuleConfigs({
+  plugins: ["."],
+  ruleName,
+
+  configs: [
+    {
+      config: "invalid"
+    },
+    {
+      config: [/invalid/],
+      description: "regex is not allowed"
+    }
+  ]
+});
+```
 
 ## [Changelog](CHANGELOG.md)
 

@@ -2,7 +2,7 @@
 
 ## Head
 
-- Added: `invalidConfig` schema property.
+- Added: `testInvalidRuleConfigs` function.
 
 ## 6.1.1
 

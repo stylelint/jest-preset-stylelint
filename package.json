@@ -14,6 +14,7 @@
   "main": "index.js",
   "types": "index.d.ts",
   "files": [
+    "getTestInvalidRuleConfigs.js",
     "getTestRule.js",
     "jest-preset.js",
     "jest-setup.js",

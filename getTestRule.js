@@ -1,6 +1,6 @@
 'use strict';
 
-const { inspect } = require('util');
+const util = require('util');
 
 /**
  * @typedef {import('.').TestCase} TestCase
@@ -8,11 +8,8 @@ const { inspect } = require('util');
  */
 
 /** @type {import('.').getTestRule} */
-// eslint-disable-next-line jest/no-export
 module.exports = function getTestRule(options = {}) {
 	return function testRule(schema) {
-		const { ruleName, invalidConfig } = schema;
-
 		/** @type {import('stylelint').lint} */
 		let lint;
 
@@ -21,30 +18,13 @@ module.exports = function getTestRule(options = {}) {
 			lint = require('stylelint').lint;
 		});
 
-		describe(`${ruleName}`, () => {
+		describe(`${schema.ruleName}`, () => {
 			const stylelintConfig = {
 				plugins: options.plugins || schema.plugins,
 				rules: {
-					[ruleName]: schema.config,
+					[schema.ruleName]: schema.config,
 				},
 			};
-
-			if (invalidConfig) {
-				test(`invalid config ${inspect(invalidConfig)}`, async () => {
-					const config = {
-						...stylelintConfig,
-						rules: {
-							[ruleName]: invalidConfig,
-						},
-					};
-					const output = await lint({ code: '', config });
-
-					expect(output.results).toHaveLength(1);
-					expect(output.results[0].invalidOptionWarnings).toEqual([
-						{ text: expect.stringMatching(`"${ruleName}"`) },
-					]);
-				});
-			}
 
 			setupTestCases({
 				name: 'accept',
@@ -193,11 +173,11 @@ function setupTestCases({ name, cases, schema, comparisons }) {
 		testGroup(`${name}`, () => {
 			cases.forEach((testCase) => {
 				if (testCase) {
-					const testFn = testCase.only ? test.only : testCase.skip ? test.skip : test;
+					const spec = testCase.only ? it.only : testCase.skip ? it.skip : it;
 
-					describe(`${inspect(schema.config)}`, () => {
-						describe(`${inspect(testCase.code)}`, () => {
-							testFn(testCase.description || 'no description', comparisons(testCase));
+					describe(`${util.inspect(schema.config)}`, () => {
+						describe(`${util.inspect(testCase.code)}`, () => {
+							spec(testCase.description || 'no description', comparisons(testCase));
 						});
 					});
 				}
