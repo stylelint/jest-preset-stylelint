@@ -2,7 +2,7 @@
 
 [![NPM version](https://img.shields.io/npm/v/jest-preset-stylelint.svg)](https://www.npmjs.org/package/jest-preset-stylelint) [![Build Status](https://github.com/stylelint/jest-preset-stylelint/workflows/CI/badge.svg)](https://github.com/stylelint/jest-preset-stylelint/actions)
 
-[Jest](https://facebook.github.io/jest/) preset for [Stylelint](https://github.com/stylelint) plugins.
+[Jest](https://jestjs.io/) preset for [Stylelint](https://stylelint.io/) plugins.
 
 ## Installation
 
