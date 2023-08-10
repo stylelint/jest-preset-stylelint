@@ -28,7 +28,7 @@
     "lint:js": "eslint .",
     "lint:md": "remark . --quiet --frail",
     "lint:types": "tsc",
-    "release": "np",
+    "release": "np --no-release-draft",
     "pretest": "npm run lint",
     "test": "jest",
     "watch": "jest --watch",
