@@ -1,0 +1,24 @@
+version: 2
+updates:
+  - package-ecosystem: npm
+    directory: '/'
+    schedule:
+      interval: monthly
+    open-pull-requests-limit: 3
+    versioning-strategy: increase
+    labels:
+      - 'pr: dependencies'
+    groups:
+      development-dependencies:
+        dependency-type: 'development'
+        exclude-patterns: ['jest', '@types/jest']
+      jest:
+        patterns: ['jest', '@types/jest']
+
+  - package-ecosystem: github-actions
+    directory: '/'
+    schedule:
+      interval: monthly
+    open-pull-requests-limit: 3
+    labels:
+      - 'pr: dependencies'
