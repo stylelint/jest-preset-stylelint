@@ -1,6 +1,6 @@
 # Changelog
 
-## Head
+## 6.3.0
 
 - Added: `loadLint` option.
 
