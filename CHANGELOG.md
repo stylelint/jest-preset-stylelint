@@ -1,5 +1,9 @@
 # Changelog
 
+## Head
+
+- Added: `loadLint` option.
+
 ## 6.2.0
 
 - Added: `testRuleConfigs` function.

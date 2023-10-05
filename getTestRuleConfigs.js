@@ -11,17 +11,20 @@ module.exports = function getTestRuleConfigs(options = {}) {
 		only = false,
 		skip = false,
 		plugins = options.plugins,
+		loadLint: schemaLoadLint,
 	}) {
 		if (accept.length === 0 && reject.length === 0) {
 			throw new TypeError('The either "accept" or "reject" property must not be empty');
 		}
 
+		const loadLint =
+			schemaLoadLint || options.loadLint || (() => Promise.resolve(require('stylelint').lint)); // eslint-disable-line n/no-unpublished-require -- Avoid auto-install of `stylelint` peer dependency.
+
 		/** @type {import('stylelint').lint} */
 		let lint;
 
-		beforeAll(() => {
-			// eslint-disable-next-line n/no-unpublished-require
-			lint = require('stylelint').lint;
+		beforeAll(async () => {
+			lint = await loadLint();
 		});
 
 		const testGroup = only ? describe.only : skip ? describe.skip : describe;

@@ -10,12 +10,14 @@ const util = require('util');
 /** @type {import('.').getTestRule} */
 module.exports = function getTestRule(options = {}) {
 	return function testRule(schema) {
+		const loadLint =
+			schema.loadLint || options.loadLint || (() => Promise.resolve(require('stylelint').lint)); // eslint-disable-line n/no-unpublished-require -- Avoid auto-install of `stylelint` peer dependency.
+
 		/** @type {import('stylelint').lint} */
 		let lint;
 
-		beforeAll(() => {
-			// eslint-disable-next-line n/no-unpublished-require -- Avoid auto-install of `stylelint` peer dependency.
-			lint = require('stylelint').lint;
+		beforeAll(async () => {
+			lint = await loadLint();
 		});
 
 		describe(`${schema.ruleName}`, () => {

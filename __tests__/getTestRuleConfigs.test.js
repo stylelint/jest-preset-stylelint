@@ -3,10 +3,12 @@
 const getTestRuleConfigs = require('../getTestRuleConfigs.js');
 
 const testRuleConfigs = getTestRuleConfigs();
+const plugins = [require.resolve('./fixtures/plugin-foo.js')];
+const ruleName = 'plugin/foo';
 
 testRuleConfigs({
-	plugins: [require.resolve('./fixtures/plugin-foo.js')],
-	ruleName: 'plugin/foo',
+	plugins,
+	ruleName,
 
 	accept: [
 		{
@@ -27,4 +29,21 @@ testRuleConfigs({
 			description: 'regex is not allowed',
 		},
 	],
+});
+
+testRuleConfigs({
+	plugins,
+	ruleName,
+	loadLint: () => Promise.resolve(require('stylelint').lint),
+	accept: [{ config: 'a' }],
+});
+
+const testRuleConfigsWithLoadLint = getTestRuleConfigs({
+	loadLint: () => Promise.resolve(require('stylelint').lint),
+});
+
+testRuleConfigsWithLoadLint({
+	plugins,
+	ruleName,
+	accept: [{ config: 'a' }],
 });
