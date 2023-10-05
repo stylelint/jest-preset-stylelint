@@ -3,10 +3,12 @@
 const getTestRule = require('../getTestRule.js');
 
 const testRule = getTestRule();
+const plugins = [require.resolve('./fixtures/plugin-foo.js')];
+const ruleName = 'plugin/foo';
 
 testRule({
-	plugins: [require.resolve('./fixtures/plugin-foo.js')],
-	ruleName: 'plugin/foo',
+	plugins,
+	ruleName,
 	config: ['.a'],
 
 	accept: [
@@ -30,4 +32,23 @@ testRule({
 			description: 'with description',
 		},
 	],
+});
+
+testRule({
+	plugins,
+	ruleName,
+	config: ['.a'],
+	loadLint: () => Promise.resolve(require('stylelint').lint),
+	accept: [{ code: '.a {}' }],
+});
+
+const testRuleWithLoadLint = getTestRule({
+	loadLint: () => Promise.resolve(require('stylelint').lint),
+});
+
+testRuleWithLoadLint({
+	plugins,
+	ruleName,
+	config: ['.a'],
+	accept: [{ code: '.a {}' }],
 });

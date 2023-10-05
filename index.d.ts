@@ -144,6 +144,16 @@ export type TestSchema = {
 	 * @see https://jestjs.io/docs/api#testskipname-fn
 	 */
 	skip?: boolean;
+
+	/**
+	 * Loads the lint function.
+	 */
+	loadLint?: () => Promise<import('stylelint').lint>;
+};
+
+type GetTestRuleOptions = {
+	plugins?: TestSchema['plugins'];
+	loadLint?: TestSchema['loadLint'];
 };
 
 /**
@@ -154,7 +164,7 @@ export type TestRule = (schema: TestSchema) => void;
 /**
  * Create a `testRule()` function with any specified plugins.
  */
-export function getTestRule(options?: { plugins?: TestSchema['plugins'] }): TestRule;
+export function getTestRule(options?: GetTestRuleOptions): TestRule;
 
 export type ConfigCase = {
 	config: unknown;
@@ -167,7 +177,7 @@ export type ConfigCase = {
  * Test configurations for a rule.
  */
 export type TestRuleConfigs = (
-	schema: Pick<TestSchema, 'ruleName' | 'plugins' | 'only' | 'skip'> & {
+	schema: Pick<TestSchema, 'ruleName' | 'plugins' | 'only' | 'skip' | 'loadLint'> & {
 		accept?: ConfigCase[];
 		reject?: ConfigCase[];
 	},
@@ -176,7 +186,7 @@ export type TestRuleConfigs = (
 /**
  * Create a `testRuleConfigs()` function with any specified plugins.
  */
-export function getTestRuleConfigs(options?: { plugins?: TestSchema['plugins'] }): TestRuleConfigs;
+export function getTestRuleConfigs(options?: GetTestRuleOptions): TestRuleConfigs;
 
 declare global {
 	var testRule: TestRule;
