@@ -1,5 +1,9 @@
 # Changelog
 
+## Head
+
+- Fixed: `loadLint` option's type declaration.
+
 ## 6.3.0
 
 - Added: `loadLint` option.
