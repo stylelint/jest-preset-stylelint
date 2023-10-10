@@ -148,7 +148,7 @@ export type TestSchema = {
 	/**
 	 * Loads the lint function.
 	 */
-	loadLint?: () => Promise<import('stylelint').lint>;
+	loadLint?: () => Promise<(typeof import('stylelint'))['lint']>;
 };
 
 type GetTestRuleOptions = {
