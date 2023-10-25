@@ -1,5 +1,9 @@
 # Changelog
 
+## Head
+
+- Fixed: missing `getTestRuleConfigs` export.
+
 ## 6.3.1
 
 - Fixed: `loadLint` option's type declaration.

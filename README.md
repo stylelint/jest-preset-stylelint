@@ -28,7 +28,7 @@ This is useful if you have many tests. There are two additional steps to do this
 1. Create `jest.setup.js` in the root of your project. Provide `plugins` option to `getTestRule`/`getTestRuleConfigs`:
 
    ```js
-   const { getTestRule } = require("jest-preset-stylelint");
+   const { getTestRule, getTestRuleConfigs } = require("jest-preset-stylelint");
 
    global.testRule = getTestRule({ plugins: ["./"] });
    global.testRuleConfigs = getTestRuleConfigs({ plugins: ["./"] });

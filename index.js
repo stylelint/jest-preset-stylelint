@@ -1,5 +1,6 @@
 'use strict';
 
-const getTestRule = require('./getTestRule');
+const getTestRule = require('./getTestRule.js');
+const getTestRuleConfigs = require('./getTestRuleConfigs.js');
 
-module.exports = { getTestRule };
+module.exports = { getTestRule, getTestRuleConfigs };
