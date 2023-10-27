@@ -119,7 +119,7 @@ The `testRuleConfigs` function enables you to test invalid configs for a rule.
 For example:
 
 ```js
-testInvalidRuleConfigs({
+testRuleConfigs({
   plugins: ["."],
   ruleName,
 
