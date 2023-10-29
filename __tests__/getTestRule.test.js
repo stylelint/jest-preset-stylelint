@@ -1,6 +1,6 @@
 'use strict';
 
-const getTestRule = require('../getTestRule.js');
+const { getTestRule } = require('../index.js');
 
 const testRule = getTestRule();
 const plugins = [require.resolve('./fixtures/plugin-foo.js')];
