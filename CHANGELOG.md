@@ -1,6 +1,6 @@
 # Changelog
 
-## Head
+## 6.3.2
 
 - Fixed: missing `getTestRuleConfigs` export.
 
