@@ -1,5 +1,9 @@
 # Changelog
 
+## Head
+
+- Changed: `loadLint` option's default value.
+
 ## 6.3.2
 
 - Fixed: missing `getTestRuleConfigs` export.

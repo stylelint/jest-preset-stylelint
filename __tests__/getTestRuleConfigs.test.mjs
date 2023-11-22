@@ -1,10 +1,11 @@
-'use strict';
+import { getTestRuleConfigs } from '../index.js';
 
-const { getTestRuleConfigs } = require('../index.js');
+import plugin from './fixtures/plugin-foo.mjs';
 
 const testRuleConfigs = getTestRuleConfigs();
-const plugins = [require.resolve('./fixtures/plugin-foo.js')];
-const ruleName = 'plugin/foo';
+const plugins = [plugin];
+// @ts-expect-error -- TS2339: Property 'ruleName' does not exist on type 'Plugin'.
+const { ruleName } = plugin;
 
 testRuleConfigs({
 	plugins,
@@ -34,12 +35,12 @@ testRuleConfigs({
 testRuleConfigs({
 	plugins,
 	ruleName,
-	loadLint: () => Promise.resolve(require('stylelint').lint),
+	loadLint: () => import('stylelint').then((m) => m.default.lint),
 	accept: [{ config: 'a' }],
 });
 
 const testRuleConfigsWithLoadLint = getTestRuleConfigs({
-	loadLint: () => Promise.resolve(require('stylelint').lint),
+	loadLint: () => import('stylelint').then((m) => m.default.lint),
 });
 
 testRuleConfigsWithLoadLint({

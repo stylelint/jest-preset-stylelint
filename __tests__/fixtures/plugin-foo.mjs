@@ -1,10 +1,13 @@
-'use strict';
+import stylelint from 'stylelint';
 
-const stylelint = require('stylelint');
+const {
+	createPlugin,
+	utils: { report, ruleMessages, validateOptions },
+} = stylelint;
 
 const ruleName = 'plugin/foo';
 
-const messages = stylelint.utils.ruleMessages(ruleName, {
+const messages = ruleMessages(ruleName, {
 	rejected: (selector) => `No "${selector}" selector`,
 });
 
@@ -14,7 +17,7 @@ const isString = (value) => typeof value === 'string';
 /** @type {import('stylelint').Rule} */
 const ruleFunction = (primary) => {
 	return (root, result) => {
-		const validOptions = stylelint.utils.validateOptions(result, ruleName, {
+		const validOptions = validateOptions(result, ruleName, {
 			actual: primary,
 			possible: [isString],
 		});
@@ -27,7 +30,7 @@ const ruleFunction = (primary) => {
 			const { selector } = rule;
 
 			if (primary !== selector) {
-				stylelint.utils.report({
+				report({
 					result,
 					ruleName,
 					message: messages.rejected(selector),
@@ -41,4 +44,4 @@ const ruleFunction = (primary) => {
 ruleFunction.ruleName = ruleName;
 ruleFunction.messages = messages;
 
-module.exports = stylelint.createPlugin(ruleName, ruleFunction);
+export default createPlugin(ruleName, ruleFunction);

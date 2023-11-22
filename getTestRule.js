@@ -1,6 +1,6 @@
 'use strict';
 
-const util = require('util');
+const { inspect } = require('node:util');
 
 /**
  * @typedef {import('.').TestCase} TestCase
@@ -11,9 +11,11 @@ const util = require('util');
 module.exports = function getTestRule(options = {}) {
 	return function testRule(schema) {
 		const loadLint =
-			schema.loadLint || options.loadLint || (() => Promise.resolve(require('stylelint').lint)); // eslint-disable-line n/no-unpublished-require -- Avoid auto-install of `stylelint` peer dependency.
+			schema.loadLint ||
+			options.loadLint ||
+			(() => import('stylelint').then((m) => m.default.lint)); // eslint-disable-line n/no-unpublished-import -- Avoid auto-install of `stylelint` peer dependency.
 
-		/** @type {import('stylelint').lint} */
+		/** @type {import('stylelint').PublicApi['lint']} */
 		let lint;
 
 		beforeAll(async () => {
@@ -177,8 +179,8 @@ function setupTestCases({ name, cases, schema, comparisons }) {
 				if (testCase) {
 					const spec = testCase.only ? it.only : testCase.skip ? it.skip : it;
 
-					describe(`${util.inspect(schema.config)}`, () => {
-						describe(`${util.inspect(testCase.code)}`, () => {
+					describe(`${inspect(schema.config)}`, () => {
+						describe(`${inspect(testCase.code)}`, () => {
 							spec(testCase.description || 'no description', comparisons(testCase));
 						});
 					});
