@@ -1,5 +1,9 @@
 # Changelog
 
+## Head
+
+- Removed: support for Node.js less than `18.12.0`.
+
 ## 6.3.2
 
 - Fixed: missing `getTestRuleConfigs` export.
