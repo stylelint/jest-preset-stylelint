@@ -22,6 +22,8 @@ Add the preset to your `jest.config.js` or `jest` field in `package.json`:
 }
 ```
 
+### Adjust setup globally
+
 Optionally, you can avoid specifying `plugins` in every schema by defining your own setup file to configure the `testRule`/`testRuleConfigs` functions.
 This is useful if you have many tests. There are two additional steps to do this:
 
@@ -29,9 +31,12 @@ This is useful if you have many tests. There are two additional steps to do this
 
    ```js
    const { getTestRule, getTestRuleConfigs } = require("jest-preset-stylelint");
+   const myPlugin = require("./my-plugin.js");
 
-   global.testRule = getTestRule({ plugins: ["./"] });
-   global.testRuleConfigs = getTestRuleConfigs({ plugins: ["./"] });
+   const plugins = [myPlugin];
+
+   global.testRule = getTestRule({ plugins });
+   global.testRuleConfigs = getTestRuleConfigs({ plugins });
    ```
 
 2. Add `jest.setup.js` to your `jest.config.js` or `jest` field in `package.json`:
@@ -39,7 +44,7 @@ This is useful if you have many tests. There are two additional steps to do this
    ```json
    {
      "preset": "jest-preset-stylelint",
-     "setupFiles": ["jest.setup.js"]
+     "setupFiles": ["<rootDir>/jest.setup.js"]
    }
    ```
 
@@ -57,10 +62,16 @@ For example, we can test a plugin that enforces and autofixes kebab-case class s
 
 ```js
 // my-plugin.test.js
-const { messages, ruleName } = require(".");
+import myPlugin from "./my-plugin.js";
+
+const plugins = [myPlugin];
+const {
+  ruleName,
+  rule: { messages }
+} = myPlugin;
 
 testRule({
-  plugins: ["."],
+  plugins,
   ruleName,
   config: [true, { type: "kebab" }],
   fix: true,
@@ -120,7 +131,7 @@ For example:
 
 ```js
 testRuleConfigs({
-  plugins: ["."],
+  plugins,
   ruleName,
 
   accept: [
