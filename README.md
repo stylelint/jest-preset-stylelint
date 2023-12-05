@@ -48,6 +48,17 @@ This is useful if you have many tests. There are two additional steps to do this
    }
    ```
 
+### Prevent segmentation fault
+
+If you get a segmentation fault while running the preset on Node.js 18, you can use [jest-light-runner](https://www.npmjs.com/package/jest-light-runner):
+
+```json
+{
+  "preset": "jest-preset-stylelint",
+  "runner": "jest-light-runner"
+}
+```
+
 ## Usage
 
 This preset exposes the following global functions as a helper.
