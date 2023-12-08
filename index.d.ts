@@ -115,7 +115,7 @@ export type TestSchema = {
 	 *
 	 * @see https://stylelint.io/user-guide/configure#plugins
 	 */
-	plugins?: string | string[];
+	plugins?: import('stylelint').Config['plugins'];
 
 	/**
 	 * Maps to Stylelint's `customSyntax` option.

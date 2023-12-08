@@ -1,8 +1,9 @@
 # Changelog
 
-## Head
+## 7.0.0
 
 - Removed: support for Node.js less than `18.12.0`.
+- Changed: `loadLint` option's default value.
 
 ## 6.3.2
 

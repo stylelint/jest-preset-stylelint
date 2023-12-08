@@ -1,6 +1,6 @@
 'use strict';
 
-const { inspect } = require('util');
+const { inspect } = require('node:util');
 
 /** @type {import('.').getTestRuleConfigs} */
 module.exports = function getTestRuleConfigs(options = {}) {
@@ -18,9 +18,9 @@ module.exports = function getTestRuleConfigs(options = {}) {
 		}
 
 		const loadLint =
-			schemaLoadLint || options.loadLint || (() => Promise.resolve(require('stylelint').lint)); // eslint-disable-line n/no-unpublished-require -- Avoid auto-install of `stylelint` peer dependency.
+			schemaLoadLint || options.loadLint || (() => import('stylelint').then((m) => m.default.lint)); // eslint-disable-line n/no-unpublished-import -- Avoid auto-install of `stylelint` peer dependency.
 
-		/** @type {import('stylelint').lint} */
+		/** @type {import('stylelint').PublicApi['lint']} */
 		let lint;
 
 		beforeAll(async () => {
