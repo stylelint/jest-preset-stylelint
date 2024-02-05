@@ -32,7 +32,7 @@
     "pretest": "npm run lint",
     "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js",
     "watch": "npm --ignore-scripts test -- --watch",
-    "prepare": "husky install"
+    "prepare": "husky"
   },
   "lint-staged": {
     "*.js": "eslint --cache --fix",
