@@ -32,7 +32,7 @@
     "pretest": "npm run lint",
     "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js",
     "watch": "npm --ignore-scripts test -- --watch",
-    "prepare": "husky install"
+    "prepare": "husky"
   },
   "lint-staged": {
     "*.js": "eslint --cache --fix",
@@ -66,17 +66,17 @@
     "@stylelint/remark-preset": "^5.0.0",
     "@types/jest": "^29.5.12",
     "eslint": "^8.56.0",
-    "eslint-config-stylelint": "^20.0.0",
-    "eslint-plugin-jest": "^27.6.1",
-    "husky": "^8.0.3",
+    "eslint-config-stylelint": "^21.0.0",
+    "eslint-plugin-jest": "^27.6.3",
+    "husky": "^9.0.10",
     "jest": "^29.7.0",
     "jest-light-runner": "^0.6.0",
-    "lint-staged": "^15.2.0",
+    "lint-staged": "^15.2.1",
     "np": "^9.2.0",
     "npm-run-all": "^4.1.5",
-    "prettier": "^3.1.1",
+    "prettier": "^3.2.5",
     "remark-cli": "^12.0.0",
-    "stylelint": "^16.1.0",
+    "stylelint": "^16.2.1",
     "typescript": "^5.3.3"
   },
   "peerDependencies": {
