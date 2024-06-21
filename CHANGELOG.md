@@ -1,5 +1,9 @@
 # Changelog
 
+## Head
+
+- Fixed: missing `funding` field in `package.json`.
+
 ## 7.0.0
 
 - Removed: support for Node.js less than `18.12.0`.
