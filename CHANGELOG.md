@@ -2,7 +2,7 @@
 
 ## Head
 
-- Added: `codeFilename` option to `accept`/`rejected` cases in `testRule` function.
+- Added: `codeFilename` option to `accept`/`reject` cases in `testRule` function.
 
 ## 7.0.1
 
