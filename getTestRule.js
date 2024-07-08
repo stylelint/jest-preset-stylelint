@@ -39,7 +39,7 @@ module.exports = function getTestRule(options = {}) {
 						code: testCase.code,
 						config: stylelintConfig,
 						customSyntax: schema.customSyntax,
-						codeFilename: schema.codeFilename,
+						codeFilename: testCase.codeFilename || schema.codeFilename,
 					};
 
 					const output = await lint(stylelintOptions);
@@ -67,7 +67,7 @@ module.exports = function getTestRule(options = {}) {
 						code: testCase.code,
 						config: stylelintConfig,
 						customSyntax: schema.customSyntax,
-						codeFilename: schema.codeFilename,
+						codeFilename: testCase.codeFilename || schema.codeFilename,
 					};
 
 					const outputAfterLint = await lint(stylelintOptions);

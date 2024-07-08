@@ -47,6 +47,21 @@ testRule({
 	accept: [{ code: '.a {}' }],
 });
 
+testRule({
+	plugins,
+	ruleName,
+	codeFilename: 'foo.css',
+	config: ['.a', { filename: 'foo.css' }],
+	accept: [{ code: '.a {}' }, { code: '.a {}', codeFilename: 'foo.css' }],
+	reject: [
+		{
+			code: '.a {}',
+			codeFilename: 'bar.css',
+			message: messages.expectFilename('foo.css', 'bar.css'),
+		},
+	],
+});
+
 const testRuleWithLoadLint = getTestRule({
 	loadLint: () => import('stylelint').then((m) => m.default.lint),
 });
