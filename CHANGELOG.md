@@ -1,6 +1,6 @@
 # Changelog
 
-## Head
+## 7.1.0
 
 - Added: `codeFilename` option to `accept`/`reject` cases in `testRule` function.
 
