@@ -50,8 +50,9 @@ testRule({
 testRule({
 	plugins,
 	ruleName,
+	codeFilename: 'foo.css',
 	config: ['.a', { filename: 'foo.css' }],
-	accept: [{ code: '.a {}', codeFilename: 'foo.css' }],
+	accept: [{ code: '.a {}' }, { code: '.a {}', codeFilename: 'foo.css' }],
 	reject: [
 		{
 			code: '.a {}',
