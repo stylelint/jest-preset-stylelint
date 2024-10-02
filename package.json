@@ -75,7 +75,7 @@
     "@stylelint/prettier-config": "^3.0.0",
     "@stylelint/remark-preset": "^5.1.1",
     "@types/jest": "^29.5.13",
-    "eslint": "^8.57.0",
+    "eslint": "^9.11.1",
     "eslint-config-stylelint": "^22.0.0",
     "eslint-plugin-jest": "^28.8.3",
     "husky": "^9.1.6",
