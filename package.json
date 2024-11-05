@@ -49,18 +49,6 @@
     "*.{js,json,md,yml}": "prettier --write"
   },
   "prettier": "@stylelint/prettier-config",
-  "eslintConfig": {
-    "extends": [
-      "stylelint",
-      "stylelint/jest"
-    ],
-    "globals": {
-      "module": true,
-      "require": true
-    },
-    "reportUnusedDisableDirectives": true,
-    "root": true
-  },
   "remarkConfig": {
     "plugins": [
       "@stylelint/remark-preset"
@@ -75,8 +63,8 @@
     "@stylelint/prettier-config": "^3.0.0",
     "@stylelint/remark-preset": "^5.1.1",
     "@types/jest": "^29.5.13",
-    "eslint": "^8.57.0",
-    "eslint-config-stylelint": "^22.0.0",
+    "eslint": "^9.14.0",
+    "eslint-config-stylelint": "^23.0.0",
     "eslint-plugin-jest": "^28.8.3",
     "husky": "^9.1.6",
     "jest": "^29.7.0",
@@ -87,7 +75,7 @@
     "prettier": "^3.3.3",
     "remark-cli": "^12.0.1",
     "stylelint": "^16.9.0",
-    "typescript": "^5.6.2"
+    "typescript": "^5.6.3"
   },
   "peerDependencies": {
     "jest": "^29.0.2"
