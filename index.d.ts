@@ -57,6 +57,8 @@ export type Warning = {
 	 * Expected end column number of the warning.
 	 */
 	endColumn?: number;
+
+	fix?: { range: Range; text: string };
 };
 
 /**
@@ -107,6 +109,8 @@ export type TestSchema = {
 	 * Turn on autofix. Default: `false`.
 	 */
 	fix?: boolean;
+
+	computeReplacementText?: boolean;
 
 	/**
 	 * Maps to Stylelint's `plugins` configuration property.
