@@ -102,12 +102,6 @@ module.exports = function getTestRule(options = {}) {
 						}
 
 						expect(actualWarnings[i]).toMatchObject(expectedWarning);
-
-						// @ts-expect-error - API needs to be updated and released
-						if (actualWarnings[i].fix) {
-							// @ts-expect-error - API needs to be updated and released
-							expect(actualWarnings[i].fix).toEqual(expect.objectContaining(expectedWarning.fix));
-						}
 					}
 
 					if (schema.fix) {
