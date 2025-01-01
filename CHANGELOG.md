@@ -1,5 +1,9 @@
 # Changelog
 
+## 7.1.1
+
+- Fixed: circular structure in exceptions.
+
 ## 7.1.0
 
 - Added: `codeFilename` option to `accept`/`reject` cases in `testRule` function.
