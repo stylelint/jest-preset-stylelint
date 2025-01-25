@@ -1,5 +1,9 @@
 # Changelog
 
+## 7.2.0
+
+- Added: support for testing `computeEditInfo`.
+
 ## 7.1.1
 
 - Fixed: circular structure in exceptions.
