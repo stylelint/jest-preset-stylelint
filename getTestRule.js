@@ -42,7 +42,7 @@ module.exports = function getTestRule(options = {}) {
 						codeFilename: testCase.codeFilename || schema.codeFilename,
 					};
 
-					const output = await lint(stylelintOptions);
+					const output = await lint(stylelintOptions).catch(formatExceptions);
 
 					expect(output.results[0].warnings).toEqual([]);
 					expect(output.results[0].parseErrors).toEqual([]);
@@ -51,7 +51,9 @@ module.exports = function getTestRule(options = {}) {
 					if (!schema.fix) return;
 
 					// Check that --fix doesn't change code
-					const outputAfterFix = await lint({ ...stylelintOptions, fix: true });
+					const outputAfterFix = await lint({ ...stylelintOptions, fix: true }).catch(
+						formatExceptions,
+					);
 					const fixedCode = getOutputCss(outputAfterFix);
 
 					expect(fixedCode).toBe(testCase.code);
@@ -71,7 +73,7 @@ module.exports = function getTestRule(options = {}) {
 						computeEditInfo: schema.computeEditInfo,
 					};
 
-					const outputAfterLint = await lint(stylelintOptions);
+					const outputAfterLint = await lint(stylelintOptions).catch(formatExceptions);
 
 					const actualWarnings = [
 						...outputAfterLint.results[0].invalidOptionWarnings,
@@ -113,7 +115,9 @@ module.exports = function getTestRule(options = {}) {
 						);
 					}
 
-					const outputAfterFix = await lint({ ...stylelintOptions, fix: true });
+					const outputAfterFix = await lint({ ...stylelintOptions, fix: true }).catch(
+						formatExceptions,
+					);
 
 					const fixedCode = getOutputCss(outputAfterFix);
 
@@ -134,7 +138,7 @@ module.exports = function getTestRule(options = {}) {
 						...stylelintOptions,
 						code: fixedCode,
 						fix: testCase.unfixable,
-					});
+					}).catch(formatExceptions);
 
 					expect(outputAfterLintOnFixedCode.results[0]).toMatchObject({
 						warnings: outputAfterFix.results[0].warnings,
@@ -204,4 +208,20 @@ function getOutputCss(output) {
 	}
 
 	throw new TypeError('Invalid result');
+}
+
+/**
+ * @param {Error & { postcssNode?: (import('postcss').Node | Record<string, unknown>) }} error
+ * @throws
+ * @returns {never}
+ */
+function formatExceptions(error) {
+	if (error.postcssNode?.toJSON && typeof error.postcssNode.toJSON === 'function') {
+		// see: https://github.com/stylelint/jest-preset-stylelint/issues/130
+		// `postcssNode` becomes a circular plain object after structured cloning.
+		// Eagerly converting to JSON ensures that jest can always pass this data around between threads and ultimately format the report.
+		error.postcssNode = error.postcssNode.toJSON();
+	}
+
+	throw error;
 }
