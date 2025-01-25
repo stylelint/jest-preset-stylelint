@@ -63,6 +63,12 @@ const ruleFunction = (primary, secondaryOptions) => {
 					ruleName,
 					message: messages.rejected(selector),
 					node: rule,
+					fix: {
+						apply: () => {
+							rule.selector = primary;
+						},
+						node: rule,
+					},
 				});
 			}
 		});
@@ -71,5 +77,9 @@ const ruleFunction = (primary, secondaryOptions) => {
 
 ruleFunction.ruleName = ruleName;
 ruleFunction.messages = messages;
+ruleFunction.meta = {
+	url: 'plugin/foo',
+	fixable: true,
+};
 
 export default createPlugin(ruleName, ruleFunction);
