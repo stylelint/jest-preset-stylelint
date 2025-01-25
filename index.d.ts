@@ -63,7 +63,7 @@ export type Warning = {
 	 *
 	 * @experimental
 	 */
-	fix?: { range: Range; text: string };
+	fix?: { range: [number, number]; text: string };
 };
 
 /**
