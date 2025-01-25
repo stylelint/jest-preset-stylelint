@@ -110,7 +110,12 @@ export type TestSchema = {
 	 */
 	fix?: boolean;
 
-	computeReplacementText?: boolean;
+	/**
+	 * Turn on computing `EditInfo`. Default: `false`.
+	 *
+	 * @experimental
+	 */
+	computeEditInfo?: boolean;
 
 	/**
 	 * Maps to Stylelint's `plugins` configuration property.

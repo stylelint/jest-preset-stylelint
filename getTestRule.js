@@ -68,7 +68,7 @@ module.exports = function getTestRule(options = {}) {
 						config: stylelintConfig,
 						customSyntax: schema.customSyntax,
 						codeFilename: testCase.codeFilename || schema.codeFilename,
-						computeReplacementText: schema.computeReplacementText,
+						computeEditInfo: schema.computeEditInfo,
 					};
 
 					const outputAfterLint = await lint(stylelintOptions);
@@ -104,48 +104,42 @@ module.exports = function getTestRule(options = {}) {
 						expect(actualWarnings[i]).toMatchObject(expectedWarning);
 					}
 
-					if (schema.fix) {
-						// Check that --fix does change code
-						if (!testCase.fixed && testCase.fixed !== '' && !testCase.unfixable) {
-							throw new Error(
-								'If using { fix: true } in test schema, all reject cases must have { fixed: .. }',
-							);
-						}
+					if (!schema.fix) return;
 
-						const outputAfterFix = await lint({ ...stylelintOptions, fix: true });
+					// Check that --fix doesn't change code
+					if (schema.fix && !testCase.fixed && testCase.fixed !== '' && !testCase.unfixable) {
+						throw new Error(
+							'If using { fix: true } in test schema, all reject cases must have { fixed: .. }',
+						);
+					}
 
-						const fixedCode = getOutputCss(outputAfterFix);
+					const outputAfterFix = await lint({ ...stylelintOptions, fix: true });
 
-						if (!testCase.unfixable) {
+					const fixedCode = getOutputCss(outputAfterFix);
+
+					if (!testCase.unfixable) {
+						expect(fixedCode).toBe(testCase.fixed);
+						expect(fixedCode).not.toBe(testCase.code);
+					} else {
+						// can't fix
+						if (testCase.fixed) {
 							expect(fixedCode).toBe(testCase.fixed);
-							expect(fixedCode).not.toBe(testCase.code);
-						} else {
-							// can't fix
-							if (testCase.fixed) {
-								expect(fixedCode).toBe(testCase.fixed);
-							}
-
-							expect(fixedCode).toBe(testCase.code);
 						}
 
-						// Checks whether only errors other than those fixed are reported
-						const outputAfterLintOnFixedCode = await lint({
-							...stylelintOptions,
-							code: fixedCode,
-							fix: testCase.unfixable,
-						});
-
-						expect(outputAfterLintOnFixedCode.results[0]).toMatchObject({
-							warnings: outputAfterFix.results[0].warnings,
-							parseErrors: [],
-						});
+						expect(fixedCode).toBe(testCase.code);
 					}
 
-					if (schema.computeReplacementText) {
-						const outputAfterFix = await lint({ ...stylelintOptions });
+					// Checks whether only errors other than those fixed are reported
+					const outputAfterLintOnFixedCode = await lint({
+						...stylelintOptions,
+						code: fixedCode,
+						fix: testCase.unfixable,
+					});
 
-						expect(outputAfterFix.code).toBeUndefined();
-					}
+					expect(outputAfterLintOnFixedCode.results[0]).toMatchObject({
+						warnings: outputAfterFix.results[0].warnings,
+						parseErrors: [],
+					});
 				},
 			});
 		});
