@@ -58,6 +58,11 @@ export type Warning = {
 	 */
 	endColumn?: number;
 
+	/**
+	 * Expected `EditInfo` of the warning.
+	 *
+	 * @experimental
+	 */
 	fix?: { range: Range; text: string };
 };
 
