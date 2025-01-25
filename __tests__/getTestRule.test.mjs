@@ -72,3 +72,32 @@ testRuleWithLoadLint({
 	config: ['.a'],
 	accept: [{ code: '.a {}' }],
 });
+
+testRule({
+	plugins,
+	ruleName,
+	config: ['.a'],
+	computeEditInfo: true,
+
+	accept: [],
+
+	reject: [
+		{
+			code: '#a {}',
+			message: messages.rejected('#a'),
+			fix: {
+				range: [0, 1],
+				text: '.',
+			},
+		},
+		{
+			code: '.a {} #a {}',
+			message: messages.rejected('#a'),
+			description: 'with description',
+			fix: {
+				range: [6, 7],
+				text: '.',
+			},
+		},
+	],
+});

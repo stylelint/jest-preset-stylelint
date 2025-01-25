@@ -70,6 +70,7 @@ module.exports = function getTestRule(options = {}) {
 						config: stylelintConfig,
 						customSyntax: schema.customSyntax,
 						codeFilename: testCase.codeFilename || schema.codeFilename,
+						computeEditInfo: schema.computeEditInfo,
 					};
 
 					const outputAfterLint = await lint(stylelintOptions).catch(formatExceptions);
@@ -92,6 +93,7 @@ module.exports = function getTestRule(options = {}) {
 							column: expected.column,
 							endLine: expected.endLine,
 							endColumn: expected.endColumn,
+							fix: expected.fix,
 						};
 
 						for (const [key, value] of Object.entries(expectedWarning)) {
