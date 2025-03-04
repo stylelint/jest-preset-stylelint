@@ -99,5 +99,20 @@ testRule({
 				text: '.',
 			},
 		},
+		{
+			code: '#a, #a {}',
+			warnings: [
+				{
+					message: messages.rejected('#a'),
+					fix: {
+						range: [0, 1],
+						text: '.',
+					},
+				},
+				{
+					message: messages.rejected('#a'),
+				},
+			],
+		},
 	],
 });
