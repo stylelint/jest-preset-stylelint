@@ -55,22 +55,25 @@ const ruleFunction = (primary, secondaryOptions) => {
 		}
 
 		root.walkRules((rule) => {
-			const { selector } = rule;
+			const { selectors } = rule;
 
-			if (primary !== selector) {
-				report({
-					result,
-					ruleName,
-					message: messages.rejected(selector),
-					node: rule,
-					fix: {
-						apply: () => {
-							rule.selector = primary;
-						},
+			selectors.forEach((selector, index) => {
+				if (primary !== selector) {
+					report({
+						result,
+						ruleName,
+						message: messages.rejected(selector),
 						node: rule,
-					},
-				});
-			}
+						fix: {
+							apply: () => {
+								selectors[index] = primary;
+								rule.selectors = selectors;
+							},
+							node: rule,
+						},
+					});
+				}
+			});
 		});
 	};
 };
