@@ -5,6 +5,7 @@ const { inspect } = require('node:util');
 /**
  * @typedef {import('.').TestCase} TestCase
  * @typedef {import('.').TestSchema} TestSchema
+ * @typedef {import('stylelint').Config} Config
  */
 
 /** @type {import('.').getTestRule} */
@@ -23,11 +24,13 @@ module.exports = function getTestRule(options = {}) {
 		});
 
 		describe(`${schema.ruleName}`, () => {
+			/** @type Config */
 			const stylelintConfig = {
 				plugins: options.plugins || schema.plugins,
 				rules: {
 					[schema.ruleName]: schema.config,
 				},
+				languageOptions: schema.languageOptions,
 			};
 
 			setupTestCases({
