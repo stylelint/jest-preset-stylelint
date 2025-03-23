@@ -1,4 +1,5 @@
 import { getTestRule } from '../index.js';
+
 import plugin from './fixtures/plugin-foo.mjs';
 
 const testRule = getTestRule();
