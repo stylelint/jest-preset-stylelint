@@ -137,6 +137,14 @@ export type TestSchema = {
 	plugins?: import('stylelint').Config['plugins'];
 
 	/**
+	 * Maps to Stylelint's `languageOptions` configuration property.
+	 * Allows customization of syntax for at-rules, properties, types, and CSS-wide keywords.
+	 *
+	 * @see https://stylelint.io/user-guide/configure/#languageoptions
+	 */
+	languageOptions?: import('stylelint').Config['languageOptions'];
+
+	/**
 	 * Maps to Stylelint's `customSyntax` option.
 	 *
 	 * @see https://stylelint.io/user-guide/usage/options#customsyntax
