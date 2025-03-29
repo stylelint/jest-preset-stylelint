@@ -25,7 +25,7 @@ module.exports = function getTestRule(options = {}) {
 		});
 
 		describe(`${schema.ruleName}`, () => {
-			/** @type Config */
+			/** @type {Config} */
 			const stylelintConfig = {
 				plugins: options.plugins || schema.plugins,
 				rules: {
