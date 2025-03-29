@@ -101,6 +101,12 @@ module.exports = function getTestRule(options = {}) {
 						};
 
 						for (const [key, value] of Object.entries(expectedWarning)) {
+							if (schema.computeEditInfo && key === 'fix') {
+								// When `computeEditInfo` is set the test should only pass when `fix` matches the expected outcome,
+								// both in having a value and what the value is.
+								continue;
+							}
+
 							if (value === undefined) {
 								// @ts-expect-error -- Allow a partial object.
 								delete expectedWarning[key];
