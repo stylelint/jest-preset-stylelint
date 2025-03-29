@@ -1,7 +1,8 @@
 # Changelog
 
-## Unreleased (patch)
+## 7.3.0
 
+- Added: support for testing `languageOptions`.
 - Fixed: false negatives when `fix` is missing and `computedEditInfo` is set to `true`.
 
 ## 7.2.0
