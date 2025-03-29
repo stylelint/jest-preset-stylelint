@@ -5,8 +5,9 @@ const { inspect } = require('node:util');
 /**
  * @typedef {import('.').TestCase} TestCase
  * @typedef {import('.').TestSchema} TestSchema
- * @typedef {import('stylelint').Config} Config
  */
+
+/** @import {Config} from 'stylelint' */
 
 /** @type {import('.').getTestRule} */
 module.exports = function getTestRule(options = {}) {
