@@ -148,3 +148,33 @@ testRule({
 		},
 	],
 });
+
+testRule({
+	ruleName: 'at-rule-descriptor-no-unknown',
+	config: true,
+	languageOptions: {
+		syntax: {
+			atRules: {
+				foo: {
+					descriptors: {
+						bar: '<number>',
+					},
+				},
+			},
+		},
+	},
+
+	accept: [
+		{
+			code: '@foo { bar: 1; }',
+		},
+	],
+
+	reject: [
+		{
+			code: '@foo { baz: 1; }',
+			message:
+				'Unexpected unknown descriptor "baz" for at-rule "@foo" (at-rule-descriptor-no-unknown)',
+		},
+	],
+});
