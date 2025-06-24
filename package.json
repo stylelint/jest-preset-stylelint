@@ -78,7 +78,7 @@
     "typescript": "^5.8.3"
   },
   "peerDependencies": {
-    "jest": "^29.0.2"
+    "jest": "^30.0.2"
   },
   "engines": {
     "node": ">=18.12.0"
