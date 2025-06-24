@@ -1,5 +1,10 @@
 # Changelog
 
+## 8.0.0
+
+- Removed: support for Jest less than `30.0.2` from peer dependencies.
+- Removed: support for Node.js less than `18.14.0`.
+
 ## 7.3.0
 
 - Added: support for testing `languageOptions`.
