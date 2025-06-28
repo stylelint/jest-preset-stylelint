@@ -14,3 +14,5 @@ jobs:
 
   test:
     uses: stylelint/.github/.github/workflows/test.yml@main
+    with:
+      node-version: '["20", "22", "24"]'
