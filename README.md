@@ -22,17 +22,7 @@ Add the preset to your `jest.config.js` or `jest` field in `package.json`:
 }
 ```
 
-If your plugin is written as an ESM, you'll need to use the `--experimental-vm-modules` flag:
-
-```json
-{
-  "scripts": {
-    "test": "cross-env NODE_OPTIONS=\"--experimental-vm-modules --no-warnings\" jest --runInBand"
-  }
-}
-```
-
-(cross-env is in maintenance-mode as it's [considered finished](https://github.com/kentcdodds/cross-env/issues/257#issue-754591323).)
+If your plugin is ESM, you'll need to [configure Jest appropriately](https://jestjs.io/docs/ecmascript-modules).
 
 ### Adjust setup globally
 
