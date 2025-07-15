@@ -22,6 +22,8 @@ Add the preset to your `jest.config.js` or `jest` field in `package.json`:
 }
 ```
 
+If your plugin is ESM, you'll need to [configure Jest appropriately](https://jestjs.io/docs/ecmascript-modules).
+
 ### Adjust setup globally
 
 Optionally, you can avoid specifying `plugins` in every schema by defining your own setup file to configure the `testRule`/`testRuleConfigs` functions.
