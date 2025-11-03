@@ -38,10 +38,10 @@
     "lint:js": "eslint .",
     "lint:md": "remark . --quiet --frail",
     "lint:types": "tsc",
+    "prepare": "husky",
     "pretest": "npm run lint",
     "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js",
-    "watch": "npm --ignore-scripts test -- --watch",
-    "prepare": "husky"
+    "watch": "npm --ignore-scripts test -- --watch"
   },
   "lint-staged": {
     "*.js": "eslint --cache --fix",
