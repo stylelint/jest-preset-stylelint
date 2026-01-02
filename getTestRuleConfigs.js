@@ -18,7 +18,7 @@ module.exports = function getTestRuleConfigs(options = {}) {
 		}
 
 		const loadLint =
-			schemaLoadLint || options.loadLint || (() => import('stylelint').then((m) => m.default.lint)); // eslint-disable-line n/no-unpublished-import -- Avoid auto-install of `stylelint` peer dependency.
+			schemaLoadLint || options.loadLint || (() => import('stylelint').then((m) => m.default.lint));
 
 		/** @type {import('stylelint').PublicApi['lint']} */
 		let lint;
