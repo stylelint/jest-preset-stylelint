@@ -1,5 +1,9 @@
 # Changelog
 
+## 9.0.0
+
+- Removed: `stylelint` less than `17.0.0` from peer dependencies.
+
 ## 8.0.0
 
 - Removed: support for Jest less than `30.0.2` from peer dependencies.
