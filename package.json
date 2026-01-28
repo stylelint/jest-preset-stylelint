@@ -79,6 +79,14 @@
     "jest": "^30.2.0",
     "stylelint": "^17.0.0"
   },
+  "peerDependenciesMeta": {
+    "jest": {
+      "optional": true
+    },
+    "stylelint": {
+      "optional": true
+    }
+  },
   "engines": {
     "node": ">=20.19.0"
   }

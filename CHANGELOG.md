@@ -1,5 +1,9 @@
 # Changelog
 
+## Head
+
+- Changed: `jest` and `stylelint` peer dependencies to optional.
+
 ## 9.0.0
 
 - Removed: `stylelint` less than `17.0.0` from peer dependencies.
