@@ -173,8 +173,7 @@ testRule({
 	reject: [
 		{
 			code: '@foo { baz: 1; }',
-			message:
-				'Unexpected unknown descriptor "baz" for at-rule "@foo" (at-rule-descriptor-no-unknown)',
+			message: 'Unknown descriptor "baz" for at-rule "@foo" (at-rule-descriptor-no-unknown)',
 		},
 	],
 });
