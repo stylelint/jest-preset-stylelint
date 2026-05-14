@@ -182,7 +182,7 @@ testRule({
 	ruleName: 'no-unknown-animations',
 	config: true,
 	referenceFiles: {
-		files: '__tests__/fixtures/animations.css'
+		files: '__tests__/fixtures/animations.css',
 	},
 
 	accept: [
