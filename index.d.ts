@@ -146,7 +146,9 @@ export type TestSchema = {
 
 	/**
 	 * Maps to Stylelint's `referenceFiles` configuration property.
-	 * Allows customization of syntax for at-rules, properties, types, and CSS-wide keywords.
+	 * An array of globs or objects to specify what files to get reference information from
+	 *
+	 * @experimental
 	 *
 	 * @see https://stylelint.io/user-guide/configure/#referencefiles
 	 */
