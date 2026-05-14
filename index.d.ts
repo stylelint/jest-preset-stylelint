@@ -138,11 +138,21 @@ export type TestSchema = {
 
 	/**
 	 * Maps to Stylelint's `languageOptions` configuration property.
-	 * Allows customization of syntax for at-rules, properties, types, and CSS-wide keywords.
+	 * An array of globs or objects to specify what files to get reference information from
+	 *
+	 * @experimental
 	 *
 	 * @see https://stylelint.io/user-guide/configure/#languageoptions
 	 */
 	languageOptions?: import('stylelint').Config['languageOptions'];
+
+	/**
+	 * Maps to Stylelint's `referenceFiles` configuration property.
+	 * Allows customization of syntax for at-rules, properties, types, and CSS-wide keywords.
+	 *
+	 * @see https://stylelint.io/user-guide/configure/#referencefiles
+	 */
+	referenceFiles?: import('stylelint').Config['referenceFiles'];
 
 	/**
 	 * Maps to Stylelint's `customSyntax` option.

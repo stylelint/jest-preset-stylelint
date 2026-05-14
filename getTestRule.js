@@ -32,6 +32,7 @@ module.exports = function getTestRule(options = {}) {
 					[schema.ruleName]: schema.config,
 				},
 				languageOptions: schema.languageOptions,
+				referenceFiles: schema.referenceFiles,
 			};
 
 			setupTestCases({

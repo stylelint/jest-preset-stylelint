@@ -177,3 +177,24 @@ testRule({
 		},
 	],
 });
+
+testRule({
+	ruleName: 'no-unknown-animations',
+	config: true,
+	referenceFiles: {
+		files: '__tests__/fixtures/animations.css'
+	},
+
+	accept: [
+		{
+			code: 'a { animation-name: foo; }',
+		},
+	],
+
+	reject: [
+		{
+			code: 'a { animation-name: bar; }',
+			message: 'Unknown animation "bar" (no-unknown-animations)',
+		},
+	],
+});
