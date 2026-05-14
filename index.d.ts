@@ -138,9 +138,7 @@ export type TestSchema = {
 
 	/**
 	 * Maps to Stylelint's `languageOptions` configuration property.
-	 * An array of globs or objects to specify what files to get reference information from
-	 *
-	 * @experimental
+	 * Allows customization of syntax for at-rules, properties, types, and CSS-wide keywords.
 	 *
 	 * @see https://stylelint.io/user-guide/configure/#languageoptions
 	 */
