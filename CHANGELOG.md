@@ -1,6 +1,6 @@
 # Changelog
 
-## Head
+## 9.2.0
 
 - Added: support for testing `referenceFiles`.
 
