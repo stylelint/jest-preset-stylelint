@@ -1,5 +1,9 @@
 # Changelog
 
+## Head
+
+- Added: support for testing `referenceFiles`.
+
 ## 9.1.0
 
 - Changed: `jest` and `stylelint` peer dependencies to optional.

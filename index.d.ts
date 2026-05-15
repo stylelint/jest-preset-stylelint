@@ -145,6 +145,16 @@ export type TestSchema = {
 	languageOptions?: import('stylelint').Config['languageOptions'];
 
 	/**
+	 * Maps to Stylelint's `referenceFiles` configuration property.
+	 * An array of globs or objects to specify what files to get reference information from
+	 *
+	 * @experimental
+	 *
+	 * @see https://stylelint.io/user-guide/configure/#referencefiles
+	 */
+	referenceFiles?: import('stylelint').Config['referenceFiles'];
+
+	/**
 	 * Maps to Stylelint's `customSyntax` option.
 	 *
 	 * @see https://stylelint.io/user-guide/usage/options#customsyntax
