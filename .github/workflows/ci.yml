@@ -16,8 +16,6 @@ jobs:
 
   test:
     uses: stylelint/.github/.github/workflows/call-test.yml@6ac761787832e417273f7bb071ec8cf35abcc3d6 # 1.0.0
-    with:
-      node-version: '["20", "22", "24"]'
     permissions:
       contents: read
 
