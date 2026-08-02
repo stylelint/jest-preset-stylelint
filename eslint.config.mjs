@@ -11,4 +11,10 @@ export default [
 			jest: { version: 27 },
 		},
 	},
+	{
+		files: ['getTestRule.js', 'getTestRuleConfigs.js'],
+		rules: {
+			'jest/no-export': 'off',
+		},
+	},
 ];
