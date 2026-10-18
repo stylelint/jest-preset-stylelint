@@ -1,6 +1,6 @@
 {
   "name": "jest-preset-stylelint",
-  "version": "9.2.0",
+  "version": "9.2.1",
   "description": "Jest preset for Stylelint plugins.",
   "keywords": [
     "stylelint",
@@ -75,7 +75,7 @@
     "typescript": "^6.0.3"
   },
   "peerDependencies": {
-    "jest": "^30.5.2",
+    "jest": "^30.3.0",
     "stylelint": "^17.0.0"
   },
   "peerDependenciesMeta": {
