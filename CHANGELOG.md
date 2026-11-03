@@ -1,5 +1,10 @@
 # Changelog
 
+## 10.0.0
+
+- Removed: `stylelint` less than `18.0.0` from peer dependencies.
+- Removed: support for end-of-life and older versions of Node.js.
+
 ## 9.2.1
 
 No consumer-facing change.
